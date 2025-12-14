@@ -1,0 +1,33 @@
+.stats-container {
+  .provider-grid,
+  .ioc-type-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 8px;
+  }
+
+  .provider-item,
+  .ioc-type-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .provider-name,
+  .ioc-type-name {
+    font-size: 0.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    flex: 1;
+  }
+
+  .provider-count,
+  .ioc-type-count {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+  }
+}

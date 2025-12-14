@@ -1,0 +1,17 @@
+<template>
+  <div>
+    <router-view v-slot="{ Component }">
+      <component :is="Component" />
+    </router-view>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { useTheme } from '@/composables/useTheme'
+
+const { resetToDefaultTheme } = useTheme()
+
+onMounted(() => {
+  resetToDefaultTheme()
+})
+</script>
