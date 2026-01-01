@@ -334,7 +334,7 @@ const buildUpdateData = (): UpdateIntegrationRequest => {
   if (formData.value.isDefault !== integration.isDefault) {
     changedData.isDefault = formData.value.isDefault
   }
-  
+
   if (formData.value.apiKey && formData.value.apiKey.trim()) {
     changedData.apiKey = formData.value.apiKey
   }

@@ -15,8 +15,15 @@
     <template #item="{ props: itemProps, item }">
       <v-list-item v-bind="itemProps">
         <template #prepend>
-          <v-avatar :color="item.raw.provider?.color || 'primary'" size="32">
-            <v-icon :icon="item.raw.provider?.icon || 'mdi-api'" color="white" size="16" />
+          <v-avatar
+            :color="item.raw.provider?.color || 'primary'"
+            size="32"
+          >
+            <v-icon
+              :icon="item.raw.provider?.icon || 'mdi-api'"
+              color="white"
+              size="16"
+            />
           </v-avatar>
         </template>
         <v-list-item-subtitle>
@@ -27,8 +34,16 @@
 
     <template #selection="{ item }">
       <div class="d-flex align-center">
-        <v-avatar :color="item.raw.provider?.color || 'primary'" size="24" class="me-2">
-          <v-icon :icon="item.raw.provider?.icon || 'mdi-api'" color="white" size="12" />
+        <v-avatar
+          :color="item.raw.provider?.color || 'primary'"
+          size="24"
+          class="me-2"
+        >
+          <v-icon
+            :icon="item.raw.provider?.icon || 'mdi-api'"
+            color="white"
+            size="12"
+          />
         </v-avatar>
         <span>{{ item.raw.name }}</span>
       </div>
@@ -36,11 +51,21 @@
 
     <template #no-data>
       <div class="pa-4 text-center">
-        <v-icon icon="mdi-alert-circle-outline" size="48" color="warning" class="mb-2" />
+        <v-icon
+          icon="mdi-alert-circle-outline"
+          size="48"
+          color="warning"
+          class="mb-2"
+        />
         <div class="text-body-2 text-medium-emphasis mb-2">
           {{ t('common.no_integrations_available') }}
         </div>
-        <v-btn :to="{ name: 'integrations' }" color="primary" size="small" variant="outlined">
+        <v-btn
+          :to="{ name: 'integrations' }"
+          color="primary"
+          size="small"
+          variant="outlined"
+        >
           {{ t('common.add_integration') }}
         </v-btn>
       </div>
@@ -77,7 +102,7 @@ const integrations = computed(() => integrationsStore.integrationsList)
 
 const selectedIntegration = computed({
   get: () => props.modelValue,
-  set: (value) => emit('update:modelValue', value || null),
+  set: (value) => emit('update:modelValue', value || null)
 })
 
 const availableIntegrations = computed(() => {
@@ -85,13 +110,13 @@ const availableIntegrations = computed(() => {
 
   if (props.provider && props.provider.trim()) {
     filtered = filtered.filter(
-      (integration) => integration.provider.toLowerCase() === props.provider!.toLowerCase(),
+      (integration) => integration.provider.toLowerCase() === props.provider!.toLowerCase()
     )
   }
 
   const enriched = filtered.map((integration) => ({
     ...integration,
-    provider: getIntegrationProvider(integration.provider),
+    provider: getIntegrationProvider(integration.provider)
   })) as (Integration & { provider: IntegrationProvider | undefined })[]
 
   return enriched.sort((a, b) => {
@@ -118,7 +143,7 @@ watch(
       handleSelectionChange(newIntegrations[0].id)
     }
   },
-  { immediate: true },
+  { immediate: true }
 )
 
 onMounted(() => {

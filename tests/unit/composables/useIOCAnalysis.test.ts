@@ -4,16 +4,16 @@ import { useIOCAnalysis } from '@/composables/useIOCAnalysis'
 
 const mocks = vi.hoisted(() => ({
   integrations: { getById: vi.fn() },
-  analysis: { create: vi.fn() },
-  export: { exportIOCResults: vi.fn(), exportIOCResultsByProvider: vi.fn() },
-  strategy: { analyzeIP: vi.fn() },
+  analysis:     { create: vi.fn() },
+  export:       { exportIOCResults: vi.fn(), exportIOCResultsByProvider: vi.fn() },
+  strategy:     { analyzeIP: vi.fn() }
 }))
 
 vi.mock('@/services/integrationsService', () => ({ integrationsService: mocks.integrations }))
 vi.mock('@/services/iocAnalysisService', () => ({ iocAnalysisService: mocks.analysis }))
 vi.mock('@/composables/useExport', () => ({ useExport: () => mocks.export }))
 vi.mock('@/services/strategies/VirusTotalStrategy', () => ({
-  VirusTotalStrategy: vi.fn(() => mocks.strategy),
+  VirusTotalStrategy: vi.fn(() => mocks.strategy)
 }))
 
 describe('useIOCAnalysis', () => {
@@ -61,11 +61,11 @@ describe('useIOCAnalysis', () => {
   describe('result management', () => {
     it('manages results (add, get, remove, clear)', () => {
       const result = {
-        id: 'res-1',
+        id:       'res-1',
         iocValue: '8.8.8.8',
-        iocType: 'ip',
+        iocType:  'ip',
         provider: 'virustotal',
-        data: {},
+        data:     {}
       }
       composable._internalResults.value.set('integration-8.8.8.8', result as any)
 

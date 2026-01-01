@@ -160,8 +160,8 @@ import { useClipboard } from '@vueuse/core'
 import { useExport } from '@/composables/useExport'
 import { useTheme } from '@/composables/useTheme'
 
-import { getProviderIcon, getProviderColor, formatIOCType } from '@/helpers/iocHelpers'
 import { formatDateWithTimezone } from '@/helpers/dateHelpers'
+import { getProviderIcon, getProviderColor, formatIOCType } from '@/helpers/iocHelpers'
 
 interface Props {
   showModal: boolean

@@ -81,8 +81,8 @@
 </template>
 
 <script setup lang="ts">
-import { getProviderIcon, getProviderColor } from '@/helpers/iocHelpers'
 import { formatDateWithTimezone } from '@/helpers/dateHelpers'
+import { getProviderIcon, getProviderColor } from '@/helpers/iocHelpers'
 import { iocAnalysisService, type IOCResultBase } from '@/services/iocAnalysisService'
 
 interface Props {

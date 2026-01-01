@@ -3,7 +3,6 @@ import type { IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 export const useExport = () => {
   const exportIOCResults = (results: IOCAnalysisResult[], filename?: string) => {
     if (results.length === 0) {
-      console.warn('No hay resultados para exportar')
       return
     }
 

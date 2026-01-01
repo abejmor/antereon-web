@@ -1,5 +1,5 @@
-import type { IOCAnalysisStrategy, IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 import type { AbuseIPDBApiResponse } from '@/types/abuseIPDB/responses/ip'
+import type { IOCAnalysisStrategy, IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 
 import { Service } from '@/services/service'
 

@@ -246,7 +246,7 @@ const updateProfile = async () => {
   formRefs.value.profileForm = profileForm.value
 
   const isValid = await formRefs.value.profileForm?.validate()
-  if (!isValid?.valid) return
+  if (!isValid) return
 
   startLoading()
 
@@ -274,7 +274,7 @@ const changePassword = async () => {
   formRefs.value.passwordForm = passwordForm.value
 
   const isValid = await formRefs.value.passwordForm?.validate()
-  if (!isValid?.valid) return
+  if (!isValid) return
 
   passwordLoading.value = true
 

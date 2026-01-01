@@ -1,5 +1,5 @@
 interface FormRef {
-  validate: () => Promise<boolean>
+  validate: ()=> Promise<boolean>
 }
 
 export const useValidation = () => {
