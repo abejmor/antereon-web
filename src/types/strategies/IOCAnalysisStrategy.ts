@@ -16,11 +16,3 @@ export interface IOCAnalysisResult {
   error?: string;
   analysisTimestamp?: string;
 }
-
-export type AnalysisStatus = 'idle' | 'loading' | 'success' | 'error';
-
-export interface AnalysisConfig {
-  timeout?: number;
-  retries?: number;
-  cache?: boolean;
-}

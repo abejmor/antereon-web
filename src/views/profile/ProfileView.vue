@@ -262,8 +262,9 @@ const updateProfile = async () => {
     }
 
     showSnackbar(t('profile.edit_profile.success_message'), 'success')
-  } catch (error: any) {
-    showSnackbar(error.message || t('profile.edit_profile.error_message'), 'error')
+  } catch (error: Error | unknown) {
+    const errorMessage = error instanceof Error ? error.message : t('profile.edit_profile.error_message')
+    showSnackbar(errorMessage, 'error')
   } finally {
     stopLoading()
   }
@@ -289,8 +290,9 @@ const changePassword = async () => {
     }
 
     showSnackbar(t('profile.change_password.success_message'), 'success')
-  } catch (error: any) {
-    showSnackbar(error.message || t('profile.change_password.error_message'), 'error')
+  } catch (error: Error | unknown) {
+    const errorMessage = error instanceof Error ? error.message : t('profile.change_password.error_message')
+    showSnackbar(errorMessage, 'error')
   } finally {
     stopLoading()
   }

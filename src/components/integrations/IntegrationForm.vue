@@ -145,11 +145,11 @@
             <v-text-field
               :model-value="getFieldValue(field.key)"
               :label="field.label"
-              :placeholder="field.placeholder"
+              :placeholder="getFieldPlaceholder(field)"
               :type="field.type === 'password' && !showPasswords[field.key] ? 'password' : 'text'"
               :rules="getFieldRules(field)"
-              :required="field.required"
-              :hint="field.description"
+              :required="field.required && !isEditing"
+              :hint="getFieldHint(field)"
               persistent-hint
               @update:model-value="setFieldValue(field.key, $event)"
             >
@@ -208,7 +208,7 @@
 <script setup lang="ts">
 import type { Integration, CreateIntegrationRequest, UpdateIntegrationRequest } from '@/types/integration'
 
-import { AVAILABLE_INTEGRATIONS, getIntegrationProvider } from '@/constants/integrations'
+import { AVAILABLE_INTEGRATIONS, getIntegrationProvider, type IntegrationField } from '@/constants/integrations'
 import { integrationsService } from '@/services/integrationsService'
 import { required, minLength, maxLength, url } from '@/validators'
 
@@ -234,7 +234,6 @@ const { t } = useI18n()
 const formRef = ref()
 const isFormValid = ref(false)
 const showPasswords = ref<Record<string, boolean>>({})
-const realApiKey = ref<string>('')
 
 const isEditing = computed(() => !!props.integration)
 const providerOptions = computed(() => AVAILABLE_INTEGRATIONS)
@@ -244,7 +243,7 @@ const initializeFormData = () => {
     return {
       name:          props.integration.name || '',
       provider:      props.integration.provider || '',
-      apiKey:        '••••••••••••••••',
+      apiKey:        '',
       isActive:      props.integration.isActive ?? true,
       isDefault:     props.integration.isDefault ?? false,
       configuration: { ...props.integration.configuration }
@@ -277,10 +276,10 @@ const providerRules = [
   required
 ]
 
-const getFieldRules = (field: any) => {
+const getFieldRules = (field: IntegrationField) => {
   const rules = []
 
-  if (field.required) {
+  if (field.required && !(isEditing.value && field.key === 'api_key')) {
     rules.push(required)
   }
 
@@ -291,58 +290,56 @@ const getFieldRules = (field: any) => {
   return rules
 }
 
+const getFieldPlaceholder = (field: IntegrationField): string => {
+  if (field.key === 'api_key' && isEditing.value) {
+    return t('integrations.form.placeholder.api_key_saved')
+  }
+  return field.placeholder || ''
+}
+
+const getFieldHint = (field: IntegrationField): string => {
+  if (field.key === 'api_key' && isEditing.value) {
+    return t('integrations.form.hint.api_key_optional')
+  }
+  return field.description || ''
+}
+
 const getFieldValue = (fieldKey: string): string => {
   if (fieldKey === 'api_key') {
-    if (showPasswords.value[fieldKey] && realApiKey.value !== '') {
-      return realApiKey.value
-    }
-    return formData.value.apiKey || ''
+    return formData.value.apiKey
   }
   return formData.value.configuration[fieldKey] || ''
 }
 
 const setFieldValue = (fieldKey: string, value: string) => {
   if (fieldKey === 'api_key') {
-    if (value !== '••••••••••••••••') {
-      formData.value.apiKey = value
-      realApiKey.value = value
-    }
+    formData.value.apiKey = value
   } else {
     formData.value.configuration[fieldKey] = value
   }
 }
 
 const buildUpdateData = (): UpdateIntegrationRequest => {
-  const updateData: UpdateIntegrationRequest = {}
   const { integration } = props
+  if (!integration) return {}
 
-  if (formData.value.name !== integration?.name) {
-    updateData.name = formData.value.name
+  const changedData: UpdateIntegrationRequest = {}
+
+  if (formData.value.name !== integration.name) {
+    changedData.name = formData.value.name
+  }
+  if (formData.value.isActive !== integration.isActive) {
+    changedData.isActive = formData.value.isActive
+  }
+  if (formData.value.isDefault !== integration.isDefault) {
+    changedData.isDefault = formData.value.isDefault
+  }
+  
+  if (formData.value.apiKey && formData.value.apiKey.trim()) {
+    changedData.apiKey = formData.value.apiKey
   }
 
-  if (formData.value.isActive !== integration?.isActive) {
-    updateData.isActive = formData.value.isActive
-  }
-
-  if (formData.value.isDefault !== integration?.isDefault) {
-    updateData.isDefault = formData.value.isDefault
-  }
-
-  const newConfiguration = {
-    ...formData.value.configuration
-  }
-
-  if (formData.value.apiKey && formData.value.apiKey !== '••••••••••••••••') {
-    newConfiguration.api_key = formData.value.apiKey
-  } else if (integration?.configuration?.api_key) {
-    newConfiguration.api_key = integration.configuration.api_key
-  }
-
-  if (JSON.stringify(newConfiguration) !== JSON.stringify(integration?.configuration)) {
-    updateData.configuration = newConfiguration
-  }
-
-  return updateData
+  return changedData
 }
 
 const buildCreateData = (): CreateIntegrationRequest => ({
@@ -357,20 +354,16 @@ const buildCreateData = (): CreateIntegrationRequest => ({
 })
 
 const togglePasswordVisibility = async (fieldKey: string) => {
-  if (fieldKey === 'api_key' && isEditing.value && !showPasswords.value[fieldKey]) {
+  if (fieldKey === 'api_key' && isEditing.value && !showPasswords.value[fieldKey] && !formData.value.apiKey) {
     try {
       if (props.integration?.id) {
         const decryptedData = await integrationsService.getDecryptedApiKey(props.integration.id)
-        realApiKey.value = decryptedData.apiKey
-      } else {
-        realApiKey.value = '••••••••••••••••'
+        formData.value.apiKey = decryptedData.apiKey
       }
     } catch (error) {
       console.error('error getting decrypted API key:', error)
-      realApiKey.value = '••••••••••••••••'
     }
   }
-
   showPasswords.value[fieldKey] = !showPasswords.value[fieldKey]
 }
 

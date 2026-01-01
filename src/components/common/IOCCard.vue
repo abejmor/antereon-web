@@ -82,18 +82,18 @@
 
 <script setup lang="ts">
 import { getProviderIcon, getProviderColor } from '@/helpers/iocHelpers'
-import { formatDateWithTimezone } from '@/helpers/utils'
-import { iocAnalysisService } from '@/services/iocAnalysisService'
+import { formatDateWithTimezone } from '@/helpers/dateHelpers'
+import { iocAnalysisService, type IOCResultBase } from '@/services/iocAnalysisService'
 
 interface Props {
-  result: any
+  result: IOCResultBase
 }
 
 const props = defineProps<Props>()
 
 const emit = defineEmits<{
-  'view-details': [result: any]
-  'delete': [result: any]
+  'view-details': [result: IOCResultBase]
+  'delete': [result: IOCResultBase]
 }>()
 
 const { t } = useI18n()

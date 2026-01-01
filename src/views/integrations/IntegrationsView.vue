@@ -181,6 +181,8 @@
 </template>
 
 <script setup lang="ts">
+import { useDebounceFn } from '@vueuse/core'
+
 import { useSnackbar } from '@/composables/useAlert'
 import { useModal } from '@/composables/useModal'
 
@@ -197,7 +199,7 @@ import type {
 
 import { getIntegrationProvider } from '@/constants/integrations'
 import { getProviderIcon, getProviderColor } from '@/helpers/iocHelpers'
-import { formatTableDate } from '@/helpers/utils'
+import { formatTableDate } from '@/helpers/dateHelpers'
 
 const { t } = useI18n()
 const integrationsStore = useIntegrationsStore()
@@ -247,8 +249,20 @@ const setFilters = <K extends keyof IntegrationsListFilters>(
   value: IntegrationsListFilters[K],
 ) => {
   integrationsStore.setFilters(key, value)
-  getIntegrationsList()
 }
+
+const getIntegrationsList = async () => {
+  try {
+    await integrationsStore.getIntegrationsList()
+  } catch (error) {
+    console.error('Error loading integrations:', error)
+    showSnackbar(t('integrations.messages.load_error'), 'error')
+  }
+}
+
+const debouncedSearch = useDebounceFn(() => {
+  getIntegrationsList()
+}, 500)
 
 const openCreateDialog = () => {
   selectedIntegration.value = undefined
@@ -330,14 +344,9 @@ const handleStatusToggle = async (integration: Integration, isActive: boolean | 
   }
 }
 
-const getIntegrationsList = async () => {
-  try {
-    await integrationsStore.getIntegrationsList()
-  } catch (error) {
-    console.error('Error loading integrations:', error)
-    showSnackbar(t('integrations.messages.load_error'), 'error')
-  }
-}
+watch(() => integrationsStore.integrationsFilters, () => {
+  debouncedSearch()
+}, { deep: true })
 
 onMounted(() => {
   getIntegrationsList()

@@ -1,6 +1,6 @@
 import { useExport } from '@/composables/useExport'
 
-import type { IOCAnalysisResult, IOCAnalysisStrategy } from '@/services/strategies/IOCAnalysisStrategy'
+import type { IOCAnalysisResult, IOCAnalysisStrategy } from '@/types/strategies/IOCAnalysisStrategy'
 
 import { AVAILABLE_INTEGRATIONS } from '@/constants/integrations'
 import { integrationsService } from '@/services/integrationsService'
@@ -39,7 +39,7 @@ export const useIOCAnalysis = () => {
     return 'unknown'
   }
 
-  const createAnalysisStrategy = async (integrationId: string, userIntegration: any): Promise<IOCAnalysisStrategy> => {
+  const createAnalysisStrategy = async (integrationId: string, userIntegration: { provider: string; name: string }): Promise<IOCAnalysisStrategy> => {
     const providerType = userIntegration.provider
 
     switch (providerType) {
@@ -72,7 +72,7 @@ export const useIOCAnalysis = () => {
     }
   }
 
-  const validateIOCAndProvider = async (ioc: string, integrationId: string, detectedType: 'ip' | 'domain' | 'hash' | 'url' | 'unknown', userIntegration: any) => {
+  const validateIOCAndProvider = async (ioc: string, integrationId: string, detectedType: 'ip' | 'domain' | 'hash' | 'url' | 'unknown', userIntegration: { provider: string; name: string }) => {
     if (detectedType === 'unknown') {
       throw new Error('could not detect IOC type')
     }
@@ -185,13 +185,12 @@ export const useIOCAnalysis = () => {
     exportIOCResults(resultsToExport, filename)
   }
 
-  const allResults = computed(() => Array.from(results.value.values()))
+  const resultsArray = computed(() => Array.from(results.value.values()))
   const hasResults = computed(() => results.value.size > 0)
   const isLoading = computed(() => isAnalyzing.value)
-  const resultsArray = computed(() => Array.from(results.value.values()))
 
   return {
-    results:          allResults,
+    results:          resultsArray,
     resultsArray,
     isAnalyzing,
     isLoading,

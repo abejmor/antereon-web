@@ -109,10 +109,10 @@ import IOCProviderHeader from '@/components/common/IOCProviderHeader.vue'
 import IOCQuickActions from '@/components/common/IOCQuickActions.vue'
 import IOCSearchForm from '@/components/common/IOCSearchForm.vue'
 
-import type { IOCAnalysisResult } from '@/services/strategies/IOCAnalysisStrategy'
+import type { IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 import type { Integration } from '@/types/integration'
 
-import { iocAnalysisService, type IOCCardResult } from '@/services/iocAnalysisService'
+import { iocAnalysisService, type IOCResultBase } from '@/services/iocAnalysisService'
 
 const { t } = useI18n()
 const {
@@ -164,7 +164,7 @@ const handleIntegrationSelected = (integration: Integration | null) => {
   selectedIntegration.value = integration
 }
 
-const openDetailsModal = async (result: IOCAnalysisResult | IOCCardResult) => {
+const openDetailsModal = async (result: IOCAnalysisResult | IOCResultBase) => {
   try {
     const fullResult = await iocAnalysisService.getById(result.id!)
     selectedResult.value = fullResult as any
@@ -179,7 +179,7 @@ const closeDetailsModal = () => {
   selectedResult.value = null
 }
 
-const handleDeleteResult = async (result: IOCAnalysisResult | IOCCardResult) => {
+const handleDeleteResult = async (result: IOCAnalysisResult | IOCResultBase) => {
   if (result.id) {
     removeResult(result.id)
   }

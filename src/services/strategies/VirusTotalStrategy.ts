@@ -1,4 +1,4 @@
-import type { IOCAnalysisStrategy, IOCAnalysisResult } from './IOCAnalysisStrategy'
+import type { IOCAnalysisStrategy, IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 import type { VirusTotalBaseResponse } from '@/types/virustotal/responses/common'
 
 import { Service } from '@/services/service'
@@ -50,11 +50,9 @@ export class VirusTotalStrategy implements IOCAnalysisStrategy {
 
   async analyzeUrl(url: string): Promise<IOCAnalysisResult> {
     try {
-      const params = this.integrationId ? { integrationId: this.integrationId } : {}
       const response = await this.service.axiosInstance.post<VirusTotalBaseResponse<any>>(
         '/api/virustotal/analyze-url',
-        { url },
-        { params }
+        { url, integrationId: this.integrationId }
       )
       return this.transformResponse(response.data, url, 'url')
     } catch (error) {
@@ -78,14 +76,14 @@ export class VirusTotalStrategy implements IOCAnalysisStrategy {
   private createErrorResult(
     iocValue: string,
     iocType: 'ip' | 'domain' | 'hash' | 'url',
-    error: any
+    error: Error | unknown
   ): IOCAnalysisResult {
     return {
       provider: this.provider,
       iocValue,
       iocType,
       data:     {},
-      error:    error?.message || 'Unknown error occurred'
+      error:    error instanceof Error ? error.message : 'Unknown error occurred'
     }
   }
 }

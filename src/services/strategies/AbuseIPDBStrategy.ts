@@ -1,4 +1,4 @@
-import type { IOCAnalysisStrategy, IOCAnalysisResult } from './IOCAnalysisStrategy'
+import type { IOCAnalysisStrategy, IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 import type { AbuseIPDBApiResponse } from '@/types/abuseIPDB/responses/ip'
 
 import { Service } from '@/services/service'
@@ -51,9 +51,9 @@ export class AbuseIPDBStrategy implements IOCAnalysisStrategy {
   private createErrorResult(
     iocValue: string,
     iocType: 'ip' | 'domain' | 'hash' | 'url',
-    error: any
+    error: Error | unknown
   ): IOCAnalysisResult {
-    let errorMessage = error?.message || 'Unknown error occurred'
+    let errorMessage = error instanceof Error ? error.message : 'Unknown error occurred'
     if (errorMessage.includes('integration not found') || errorMessage.includes('not active')) {
       errorMessage = `Provider '${this.provider}' not available`
     }

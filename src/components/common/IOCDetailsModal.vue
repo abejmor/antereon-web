@@ -161,7 +161,7 @@ import { useExport } from '@/composables/useExport'
 import { useTheme } from '@/composables/useTheme'
 
 import { getProviderIcon, getProviderColor, formatIOCType } from '@/helpers/iocHelpers'
-import { formatDateWithTimezone } from '@/helpers/utils'
+import { formatDateWithTimezone } from '@/helpers/dateHelpers'
 
 interface Props {
   showModal: boolean
