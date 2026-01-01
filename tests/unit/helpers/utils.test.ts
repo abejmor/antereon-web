@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
 
-import { formatDate, formatTableDate, formatDateOnly, getUserInitials } from '@/helpers/utils'
+import { formatDate, formatTableDate, formatDateOnly, getUserInitials } from '@/helpers/dateHelpers'
 
 describe('utils helpers', () => {
   it('formats dates correctly', () => {

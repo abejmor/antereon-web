@@ -12,11 +12,11 @@ interface User {
 export const useAuthStore = defineStore('auth', {
   state: () => ({
     authorized: false,
-    token: '',
-    user: null as User | null,
+    token:      '',
+    user:       null as User | null
   }),
   getters: {
-    isAuthenticated: (state) => state.authorized && !!state.token,
+    isAuthenticated: (state) => state.authorized && !!state.token
   },
   actions: {
     async login(email: string, password: string) {
@@ -42,9 +42,9 @@ export const useAuthStore = defineStore('auth', {
       if (reload) {
         window.location.reload()
       }
-    },
+    }
   },
   persist: {
-    pick: ['authorized', 'token', 'user'],
-  },
+    pick: ['authorized', 'token', 'user']
+  }
 })

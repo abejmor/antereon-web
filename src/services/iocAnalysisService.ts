@@ -9,27 +9,20 @@ export interface IOCAnalysisRequest {
   error?: string
 }
 
-export interface IOCAnalysisResult {
+export interface IOCResultBase {
   id: string
   iocValue: string
   iocType: 'ip' | 'domain' | 'hash' | 'url'
   provider: string
-  apiData: Record<string, any>
   error?: string
   analysisTimestamp: Date
-  userId: string
   createdAt: Date
-  updatedAt: Date
 }
 
-export interface IOCCardResult {
-  id: string
-  iocValue: string
-  iocType: 'ip' | 'domain' | 'hash' | 'url'
-  provider: string
-  error?: string
-  analysisTimestamp: Date
-  createdAt: Date
+export interface IOCAnalysisResult extends IOCResultBase {
+  apiData: Record<string, any>
+  userId: string
+  updatedAt: Date
 }
 
 export interface IOCAnalysisHistoryParams {
@@ -41,7 +34,7 @@ export interface IOCAnalysisHistoryParams {
 }
 
 export interface IOCAnalysisHistoryResponse {
-  results: IOCCardResult[];
+  results: IOCResultBase[];
   total: number;
   page: number;
   limit: number;

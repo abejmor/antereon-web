@@ -18,15 +18,14 @@
         >
           <IOCSearchForm
             v-model:search-input="searchInput"
-            :is-loading="isLoading"
+            :is-loading="isAnalyzing"
             :error="error"
             :detected-type="detectedType"
             :provider="'alienvault'"
             :analyze-button-text="t('alienvault.analyze_button')"
             :show-integration-selector="true"
-            data-testid="ioc-search-form"
+            data-testid="search-form"
             @analyze="handleAnalyze"
-            @clear-error="clearError"
             @integration-selected="handleIntegrationSelected"
           />
         </v-col>
@@ -59,7 +58,7 @@
               color="primary"
               variant="tonal"
             >
-              {{ resultsArray.length }} {{ t('common.result', resultsArray.length) }}
+              {{ results.length }} {{ t('common.result', results.length) }}
             </v-chip>
           </div>
         </v-col>
@@ -67,7 +66,7 @@
 
       <v-row v-if="hasResults">
         <v-col
-          v-for="result in resultsArray"
+          v-for="result in results"
           :key="`${result.provider}-${result.iocValue}`"
           cols="12"
           md="6"
@@ -75,7 +74,7 @@
         >
           <IOCCard
             :result="result"
-            :loading="isLoading"
+            :loading="isAnalyzing"
             @view-details="openDetailsModal"
             @delete="handleDeleteResult"
           />
@@ -84,7 +83,7 @@
 
       <IOCEmptyState
         :has-results="hasResults"
-        :is-loading="isLoading"
+        :is-loading="isAnalyzing"
         :title="t('common.no_analysis_yet')"
         :description="t('alienvault.description')"
         :supported-types-title="t('common.supported_types')"
@@ -109,20 +108,19 @@ import IOCProviderHeader from '@/components/common/IOCProviderHeader.vue'
 import IOCQuickActions from '@/components/common/IOCQuickActions.vue'
 import IOCSearchForm from '@/components/common/IOCSearchForm.vue'
 
-import type { IOCAnalysisResult } from '@/services/strategies/IOCAnalysisStrategy'
 import type { Integration } from '@/types/integration'
+import type { IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 
-import { iocAnalysisService, type IOCCardResult } from '@/services/iocAnalysisService'
+import { iocAnalysisService, type IOCResultBase } from '@/services/iocAnalysisService'
 
 const { t } = useI18n()
 const {
-  isLoading,
+  isAnalyzing,
   error,
   results,
   hasResults,
   analyzeIOC,
   detectIOCType,
-  clearError,
   clearResults,
   removeResult,
   exportResults: exportResultsComposable
@@ -139,18 +137,14 @@ const detectedType = computed(() => {
   return detectIOCType(searchInput.value.trim())
 })
 
-const resultsArray = computed(() => {
-  return Array.from(results.value.values())
-})
-
 watch(searchInput, () => {
   if (error.value) {
-    clearError()
+    error.value = null
   }
 })
 
 const handleAnalyze = async () => {
-  if (!searchInput.value.trim() || isLoading.value) return
+  if (!searchInput.value.trim() || isAnalyzing.value) return
 
   try {
     const provider = selectedIntegration.value?.id || 'alienvault'
@@ -164,7 +158,7 @@ const handleIntegrationSelected = (integration: Integration | null) => {
   selectedIntegration.value = integration
 }
 
-const openDetailsModal = async (result: IOCAnalysisResult | IOCCardResult) => {
+const openDetailsModal = async (result: IOCAnalysisResult | IOCResultBase) => {
   try {
     const fullResult = await iocAnalysisService.getById(result.id!)
     selectedResult.value = fullResult as any
@@ -179,7 +173,7 @@ const closeDetailsModal = () => {
   selectedResult.value = null
 }
 
-const handleDeleteResult = async (result: IOCAnalysisResult | IOCCardResult) => {
+const handleDeleteResult = async (result: IOCAnalysisResult | IOCResultBase) => {
   if (result.id) {
     removeResult(result.id)
   }

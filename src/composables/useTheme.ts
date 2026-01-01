@@ -34,7 +34,6 @@ export const useTheme = () => {
       localStorage.setItem('antereon-theme', themeName)
 
       const authStore = useAuthStore()
-      // @ts-ignore
       if (authStore.isAuthenticated) {
         try {
           const updatedUser = await profileService.updateProfile({ theme: themeName })
@@ -55,7 +54,6 @@ export const useTheme = () => {
     let savedTheme = 'antereonDark'
 
     const authStore = useAuthStore()
-    // @ts-ignore
     if (authStore.isAuthenticated && authStore.user?.theme) {
       savedTheme = authStore.user.theme
     } else {

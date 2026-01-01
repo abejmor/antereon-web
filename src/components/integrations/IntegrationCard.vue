@@ -85,8 +85,8 @@
 import type { Integration } from '@/types/integration'
 
 import { getIntegrationProvider } from '@/constants/integrations'
+import { formatDateOnly } from '@/helpers/dateHelpers'
 import { getIntegrationStatusColor } from '@/helpers/iocHelpers'
-import { formatDateOnly } from '@/helpers/utils'
 
 interface Props {
   integration: Integration

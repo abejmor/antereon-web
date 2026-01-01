@@ -81,3 +81,22 @@ export const formatIOCType = (type: string): string => {
   }
   return typeMap[type] || type
 }
+
+export const detectIOCType = (ioc: string): 'ip' | 'domain' | 'hash' | 'url' | 'unknown' => {
+  if (!ioc || typeof ioc !== 'string') return 'unknown'
+
+  const trimmedIOC = ioc.trim()
+  if (!trimmedIOC) return 'unknown'
+
+  const ipRegex = /^(?:(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.){3}(?:25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])$/
+  const urlRegex = /^https?:\/\/[^\s/$.?#].[^\s]*$/i
+  const domainRegex = /^(?!^\d+\.\d+\.\d+\.\d+$)[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(\.[a-zA-Z0-9]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/
+  const hashRegex = /^[a-fA-F0-9]{32}$|^[a-fA-F0-9]{40}$|^[a-fA-F0-9]{64}$/
+
+  if (ipRegex.test(trimmedIOC)) return 'ip'
+  if (urlRegex.test(trimmedIOC)) return 'url'
+  if (hashRegex.test(trimmedIOC)) return 'hash'
+  if (domainRegex.test(trimmedIOC)) return 'domain'
+
+  return 'unknown'
+}

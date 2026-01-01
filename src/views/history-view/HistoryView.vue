@@ -160,14 +160,14 @@
 </template>
 
 <script setup lang="ts">
-import { debounce } from 'lodash'
+import { useDebounceFn } from '@vueuse/core'
 
-import { iocAnalysisService, type IOCAnalysisResult, type IOCCardResult } from '@/services/iocAnalysisService'
+import { iocAnalysisService, type IOCAnalysisResult, type IOCResultBase } from '@/services/iocAnalysisService'
 
 const { t } = useI18n()
 
 const historyLoading = ref(false)
-const historyResults = ref<IOCCardResult[]>([])
+const historyResults = ref<IOCResultBase[]>([])
 const historyTotal = ref(0)
 const historyError = ref<string | null>(null)
 const selectedResult = ref<IOCAnalysisResult | null>(null)
@@ -234,12 +234,12 @@ const loadHistoryData = async () => {
   }
 }
 
-const debouncedSearch = debounce(() => {
+const debouncedSearch = useDebounceFn(() => {
   currentPage.value = 1
   loadHistoryData()
 }, 500)
 
-const handleViewDetails = async (result: IOCAnalysisResult | IOCCardResult) => {
+const handleViewDetails = async (result: IOCAnalysisResult | IOCResultBase) => {
   try {
     if (result.id) {
       const fullResult = await iocAnalysisService.getById(result.id)
@@ -260,7 +260,7 @@ const closeDetailsModal = () => {
   selectedResult.value = null
 }
 
-const handleDeleteResult = async (_result: IOCCardResult) => {
+const handleDeleteResult = async (_result: IOCResultBase) => {
   try {
     await loadHistoryData()
   } catch (error) {

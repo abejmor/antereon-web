@@ -1,4 +1,4 @@
-import type { IOCAnalysisStrategy, IOCAnalysisResult } from './IOCAnalysisStrategy'
+import type { IOCAnalysisStrategy, IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 
 import { Service } from '@/services/service'
 
@@ -60,7 +60,7 @@ export class AlienVaultStrategy implements IOCAnalysisStrategy {
   }
 
   private transformResponse(
-    response: any,
+    response: { apiData: Record<string, unknown> },
     ioc: string,
     iocType: 'ip' | 'domain' | 'hash' | 'url'
   ): IOCAnalysisResult {
@@ -75,27 +75,15 @@ export class AlienVaultStrategy implements IOCAnalysisStrategy {
   private createErrorResult(
     iocValue: string,
     iocType: 'ip' | 'domain' | 'hash' | 'url',
-    error: any
+    error: Error | unknown
   ): IOCAnalysisResult {
     return {
       provider: this.provider,
       iocValue,
       iocType,
       data:     {},
-      error:    error?.message || 'Unknown error occurred'
+      error:    error instanceof Error ? error.message : 'Unknown error occurred'
     }
   }
 
-  private createUnsupportedResult(
-    iocValue: string,
-    iocType: 'ip' | 'domain' | 'hash' | 'url'
-  ): IOCAnalysisResult {
-    return {
-      provider: this.provider,
-      iocValue,
-      iocType,
-      data:     {},
-      error:    `${iocType} analysis not supported by AlienVault`
-    }
-  }
 }

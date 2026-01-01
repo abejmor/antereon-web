@@ -14,7 +14,7 @@
             {{ getProviderIcon('virustotal') }}
           </v-icon>
           <span class="provider-name">{{ t('landing.hero_section.dashboard.provider_stats.virustotal') }}</span>
-          <span class="provider-count">{{ formattedGlobalData?.analyses_by_provider?.virustotal || 0 }}</span>
+          <span class="provider-count">{{ formattedGlobalData?.analysesByProvider?.virustotal || 0 }}</span>
         </div>
         <div class="provider-item">
           <v-icon
@@ -25,7 +25,7 @@
             {{ getProviderIcon('alienvault') }}
           </v-icon>
           <span class="provider-name">{{ t('landing.hero_section.dashboard.provider_stats.alienvault') }}</span>
-          <span class="provider-count">{{ formattedGlobalData?.analyses_by_provider?.alienvault || 0 }}</span>
+          <span class="provider-count">{{ formattedGlobalData?.analysesByProvider?.alienvault || 0 }}</span>
         </div>
         <div class="provider-item">
           <v-icon
@@ -36,7 +36,7 @@
             {{ getProviderIcon('abuseipdb') }}
           </v-icon>
           <span class="provider-name">{{ t('landing.hero_section.dashboard.provider_stats.abuseipdb') }}</span>
-          <span class="provider-count">{{ formattedGlobalData?.analyses_by_provider?.abuseipdb || 0 }}</span>
+          <span class="provider-count">{{ formattedGlobalData?.analysesByProvider?.abuseipdb || 0 }}</span>
         </div>
       </div>
     </div>
@@ -55,7 +55,7 @@
             mdi-web
           </v-icon>
           <span class="ioc-type-name">{{ t('landing.hero_section.dashboard.ioc_stats.domains') }}</span>
-          <span class="ioc-type-count">{{ formattedGlobalData?.analyses_by_ioc_type?.domains || 0 }}</span>
+          <span class="ioc-type-count">{{ formattedGlobalData?.analysesByType?.domain || 0 }}</span>
         </div>
         <div class="ioc-type-item">
           <v-icon
@@ -66,7 +66,7 @@
             mdi-ip-network
           </v-icon>
           <span class="ioc-type-name">{{ t('landing.hero_section.dashboard.ioc_stats.ips') }}</span>
-          <span class="ioc-type-count">{{ formattedGlobalData?.analyses_by_ioc_type?.ips || 0 }}</span>
+          <span class="ioc-type-count">{{ formattedGlobalData?.analysesByType?.ip || 0 }}</span>
         </div>
         <div class="ioc-type-item">
           <v-icon
@@ -77,7 +77,7 @@
             mdi-file-code
           </v-icon>
           <span class="ioc-type-name">{{ t('landing.hero_section.dashboard.ioc_stats.hashes') }}</span>
-          <span class="ioc-type-count">{{ formattedGlobalData?.analyses_by_ioc_type?.hashes || 0 }}</span>
+          <span class="ioc-type-count">{{ formattedGlobalData?.analysesByType?.hash || 0 }}</span>
         </div>
       </div>
     </div>
@@ -91,15 +91,15 @@ import { getProviderIcon } from '@/helpers/iocHelpers'
 
 interface Props {
   formattedGlobalData?: {
-    analyses_by_provider?: {
+    analysesByProvider?: {
       virustotal?: number
       alienvault?: number
       abuseipdb?: number
     }
-    analyses_by_ioc_type?: {
-      domains?: number
-      ips?: number
-      hashes?: number
+    analysesByType?: {
+      domain?: number
+      ip?: number
+      hash?: number
     }
   }
 }

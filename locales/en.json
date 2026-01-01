@@ -315,7 +315,11 @@
             },
             "placeholder": {
                 "name_placeholder": "My new integration",
-                "provider_placeholder": "Select a provider"
+                "provider_placeholder": "Select a provider",
+                "api_key_saved": "API key is securely saved (click eye to view/edit)"
+            },
+            "hint": {
+                "api_key_optional": "Leave empty to keep the current API key, or enter a new one to update it"
             }
          },
         "providers": {

@@ -125,7 +125,7 @@
               <div class="stats-grid mb-6">
                 <div class="stat-card">
                   <div class="stat-number">
-                    {{ isLoadingGlobal ? '...' : (formattedGlobalData?.total_searches?.toLocaleString() || '0') }}
+                    {{ isLoading ? '...' : stats.totalSearches.toLocaleString() }}
                   </div>
                   <div class="stat-label">
                     {{ t('landing.hero_section.dashboard.threat_stats.total_searches') }}
@@ -133,7 +133,7 @@
                 </div>
                 <div class="stat-card">
                   <div class="stat-number">
-                    {{ isLoadingGlobal ? '...' : (formattedGlobalData?.total_integrations || '0') }}
+                    {{ isLoading ? '...' : stats.totalIntegrations.toLocaleString() }}
                   </div>
                   <div class="stat-label">
                     {{ t('landing.hero_section.dashboard.threat_stats.total_integrations') }}
@@ -141,7 +141,7 @@
                 </div>
                 <div class="stat-card">
                   <div class="stat-number">
-                    {{ isLoadingGlobal ? '...' : (formattedGlobalData?.active_integrations || '0') }}
+                    {{ isLoading ? '...' : stats.activeIntegrations.toLocaleString() }}
                   </div>
                   <div class="stat-label">
                     {{ t('landing.hero_section.dashboard.threat_stats.active_apis') }}
@@ -150,7 +150,7 @@
               </div>
 
               <NetworkVisualization />
-              <StatsContainer :formatted-global-data="formattedGlobalData" />
+              <StatsContainer :formatted-global-data="stats" />
             </div>
           </div>
         </v-col>
@@ -165,8 +165,21 @@ import { useGlobalStatistics } from '@/composables/useGlobalStatistics'
 import logo from '@/assets/logo.png'
 
 const { t } = useI18n()
-const { formattedGlobalData, isLoadingGlobal, loadGlobalStatistics } = useGlobalStatistics()
+const { globalStatisticsData, isLoading, loadGlobalStatistics } = useGlobalStatistics()
 const router = useRouter()
+
+const stats = computed(() => {
+  if (!globalStatisticsData.value) {
+    return {
+      totalSearches:      0,
+      activeIntegrations: 0,
+      totalIntegrations:  0,
+      analysesByProvider: {},
+      analysesByType:     { domain: 0, ip: 0, hash: 0 }
+    }
+  }
+  return globalStatisticsData.value
+})
 
 const navigateToRegister = () => {
   router.push({ name: 'register' })

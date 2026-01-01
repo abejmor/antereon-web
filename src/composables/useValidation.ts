@@ -1,5 +1,9 @@
+interface FormRef {
+  validate: ()=> Promise<boolean>
+}
+
 export const useValidation = () => {
-  const formRefs = ref<{ [key: string]: any }>({})
+  const formRefs = ref<Record<string, FormRef>>({})
   const isValidForm = async () => {
     let isValid = true
 
@@ -15,7 +19,7 @@ export const useValidation = () => {
     return isValid
   }
 
-  const formRefsList = ref<{ [key: string]: any }[]>([])
+  const formRefsList = ref<Record<string, FormRef>[]>([])
 
   const isValidFormList = async () => {
     let isAllValid = true

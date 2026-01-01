@@ -11,7 +11,7 @@
         </v-card-title>
         <v-card-text class="pa-4">
           <div
-            v-if="isLoadingGlobal"
+            v-if="isLoading"
             class="text-center py-8"
           >
             <v-progress-circular
@@ -24,7 +24,7 @@
             </p>
           </div>
           <div
-            v-else-if="errorGlobal"
+            v-else-if="error"
             class="text-center py-8"
           >
             <v-icon
@@ -60,7 +60,7 @@
                 <v-card-title class="d-flex align-center pa-3">
                   <div>
                     <div class="text-h5 font-weight-bold">
-                      {{ formattedGlobalData.total_searches.toLocaleString() }}
+                      {{ stats.totalSearches.toLocaleString() }}
                     </div>
                     <div class="text-body-2 text-medium-emphasis mt-1">
                       {{ t('home.global_statistics.total_searches') }}
@@ -81,7 +81,7 @@
                 <v-card-title class="d-flex align-center pa-3">
                   <div>
                     <div class="text-h5 font-weight-bold">
-                      {{ formattedGlobalData.active_integrations }}
+                      {{ stats.activeIntegrations.toLocaleString() }}
                     </div>
                     <div class="text-body-2 text-medium-emphasis mt-1">
                       {{ t('home.global_statistics.active_integrations') }}
@@ -102,7 +102,7 @@
                 <v-card-title class="d-flex align-center pa-3">
                   <div>
                     <div class="text-h5 font-weight-bold">
-                      {{ formattedGlobalData.total_integrations }}
+                      {{ stats.totalIntegrations.toLocaleString() }}
                     </div>
                     <div class="text-body-2 text-medium-emphasis mt-1">
                       {{ t('home.global_statistics.total_integrations') }}
@@ -124,11 +124,25 @@ import { useGlobalStatistics } from '@/composables/useGlobalStatistics'
 const { t } = useI18n()
 
 const {
-  formattedGlobalData,
-  isLoadingGlobal,
-  errorGlobal,
+  globalStatisticsData,
+  isLoading,
+  error,
   loadGlobalStatistics
 } = useGlobalStatistics()
+
+const stats = computed(() => {
+  if (!globalStatisticsData.value) {
+    return {
+      totalSearches:      0,
+      activeIntegrations: 0,
+      totalIntegrations:  0,
+      totalIOCAnalyses:   0,
+      analysesByProvider: {},
+      analysesByType:     { domain: 0, ip: 0, hash: 0 }
+    }
+  }
+  return globalStatisticsData.value
+})
 
 onMounted(() => {
   loadGlobalStatistics()

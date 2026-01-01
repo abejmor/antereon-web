@@ -6,7 +6,7 @@ import { useAuthStore } from '@/stores/authStore'
 import { authService } from '@/services/authService'
 
 vi.mock('@/services/authService', () => ({
-  authService: { login: vi.fn(), register: vi.fn(), getUserInfo: vi.fn() },
+  authService: { login: vi.fn(), register: vi.fn(), getUserInfo: vi.fn() }
 }))
 Object.defineProperty(window, 'location', { value: { reload: vi.fn() }, writable: true })
 
@@ -47,9 +47,9 @@ describe('authStore', () => {
     const store = useAuthStore()
     store.token = 'existing'
     vi.mocked(authService.getUserInfo).mockResolvedValue({
-      id: '1',
-      name: 'User',
-      email: 'u@t.com',
+      id:    '1',
+      name:  'User',
+      email: 'u@t.com'
     })
 
     await store.authenticate()

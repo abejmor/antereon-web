@@ -30,10 +30,6 @@ class StatisticsService extends Service {
     return 'api/statistics'
   }
 
-  async getHomeStatistics(): Promise<StatisticsData> {
-    return this.axiosInstance.get(`${this.baseUrl}/home`).then(response => response.data)
-  }
-
   async getSummary(): Promise<StatisticsSummary> {
     return this.axiosInstance.get(`${this.baseUrl}/summary`).then(response => response.data)
   }

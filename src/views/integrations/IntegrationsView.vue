@@ -1,11 +1,23 @@
 <template>
-  <div class="view-container" data-testid="integrations-view">
-    <div class="d-flex align-center justify-space-between mb-6" data-testid="header-section">
+  <div
+    class="view-container"
+    data-testid="integrations-view"
+  >
+    <div
+      class="d-flex align-center justify-space-between mb-6"
+      data-testid="header-section"
+    >
       <div data-testid="title-section">
-        <h1 class="text-h4 font-weight-bold mb-2" data-testid="page-title">
+        <h1
+          class="text-h4 font-weight-bold mb-2"
+          data-testid="page-title"
+        >
           {{ t('integrations.title') }}
         </h1>
-        <p class="text-body-1 text-medium-emphasis" data-testid="page-description">
+        <p
+          class="text-body-1 text-medium-emphasis"
+          data-testid="page-description"
+        >
           {{ t('integrations.manage_description') }}
         </p>
       </div>
@@ -19,7 +31,10 @@
       </v-btn>
     </div>
 
-    <div class="d-flex gap-4 mb-6" data-testid="filters-section">
+    <div
+      class="d-flex gap-4 mb-6"
+      data-testid="filters-section"
+    >
       <v-text-field
         :model-value="integrationsStore.integrationsFilters.search"
         :label="t('integrations.search_placeholder')"
@@ -71,7 +86,10 @@
         data-testid="integrations-table"
       >
         <template #[`item.provider`]="{ item }">
-          <div class="d-flex align-center" data-testid="provider-cell">
+          <div
+            class="d-flex align-center"
+            data-testid="provider-cell"
+          >
             <v-avatar
               :color="getProviderColor(item.provider)"
               size="32"
@@ -101,13 +119,19 @@
         </template>
 
         <template #[`item.createdAt`]="{ item }">
-          <span class="text-body-2" data-testid="created-date">
+          <span
+            class="text-body-2"
+            data-testid="created-date"
+          >
             {{ formatTableDate(item.createdAt) }}
           </span>
         </template>
 
         <template #[`item.actions`]="{ item }">
-          <div class="d-flex gap-2" data-testid="actions-cell">
+          <div
+            class="d-flex gap-2"
+            data-testid="actions-cell"
+          >
             <v-btn
               icon="mdi-pencil"
               size="small"
@@ -143,9 +167,16 @@
       />
     </v-dialog>
 
-    <v-dialog v-model="deleteModal.showModal.value" max-width="400px" data-testid="delete-dialog">
+    <v-dialog
+      v-model="deleteModal.showModal.value"
+      max-width="400px"
+      data-testid="delete-dialog"
+    >
       <v-card data-testid="delete-card">
-        <v-card-title class="text-h6" data-testid="delete-title">
+        <v-card-title
+          class="text-h6"
+          data-testid="delete-title"
+        >
           {{ t('integrations.delete.title') }}
         </v-card-title>
         <v-card-text data-testid="delete-message">
@@ -153,7 +184,11 @@
         </v-card-text>
         <v-card-actions data-testid="delete-actions">
           <v-spacer />
-          <v-btn variant="text" data-testid="cancel-delete-button" @click="closeDeleteDialog">
+          <v-btn
+            variant="text"
+            data-testid="cancel-delete-button"
+            @click="closeDeleteDialog"
+          >
             {{ t('common.cancel') }}
           </v-btn>
           <v-btn
@@ -181,6 +216,8 @@
 </template>
 
 <script setup lang="ts">
+import { useDebounceFn } from '@vueuse/core'
+
 import { useSnackbar } from '@/composables/useAlert'
 import { useModal } from '@/composables/useModal'
 
@@ -192,12 +229,12 @@ import IntegrationForm from '@/components/integrations/IntegrationForm.vue'
 import type {
   Integration,
   CreateIntegrationRequest,
-  UpdateIntegrationRequest,
+  UpdateIntegrationRequest
 } from '@/types/integration'
 
 import { getIntegrationProvider } from '@/constants/integrations'
+import { formatTableDate } from '@/helpers/dateHelpers'
 import { getProviderIcon, getProviderColor } from '@/helpers/iocHelpers'
-import { formatTableDate } from '@/helpers/utils'
 
 const { t } = useI18n()
 const integrationsStore = useIntegrationsStore()
@@ -211,30 +248,30 @@ const selectedIntegration = ref<Integration | undefined>()
 
 const headers = computed(() => [
   {
-    title: t('integrations.table.name'),
-    key: 'name',
-    sortable: true,
+    title:    t('integrations.table.name'),
+    key:      'name',
+    sortable: true
   },
   {
-    title: t('integrations.table.provider'),
-    key: 'provider',
-    sortable: true,
+    title:    t('integrations.table.provider'),
+    key:      'provider',
+    sortable: true
   },
   {
-    title: t('integrations.table.status'),
-    key: 'isActive',
-    sortable: true,
+    title:    t('integrations.table.status'),
+    key:      'isActive',
+    sortable: true
   },
   {
-    title: t('integrations.table.created'),
-    key: 'createdAt',
-    sortable: true,
+    title:    t('integrations.table.created'),
+    key:      'createdAt',
+    sortable: true
   },
   {
-    title: t('common.actions'),
-    key: 'actions',
-    sortable: false,
-  },
+    title:    t('common.actions'),
+    key:      'actions',
+    sortable: false
+  }
 ])
 
 const getProviderName = (providerId: string): string => {
@@ -244,11 +281,23 @@ const getProviderName = (providerId: string): string => {
 
 const setFilters = <K extends keyof IntegrationsListFilters>(
   key: K,
-  value: IntegrationsListFilters[K],
+  value: IntegrationsListFilters[K]
 ) => {
   integrationsStore.setFilters(key, value)
-  getIntegrationsList()
 }
+
+const getIntegrationsList = async () => {
+  try {
+    await integrationsStore.getIntegrationsList()
+  } catch (error) {
+    console.error('Error loading integrations:', error)
+    showSnackbar(t('integrations.messages.load_error'), 'error')
+  }
+}
+
+const debouncedSearch = useDebounceFn(() => {
+  getIntegrationsList()
+}, 500)
 
 const openCreateDialog = () => {
   selectedIntegration.value = undefined
@@ -282,7 +331,7 @@ const handleFormSubmit = async (data: CreateIntegrationRequest | UpdateIntegrati
     if (selectedIntegration.value) {
       await integrationsStore.updateIntegration(
         selectedIntegration.value.id,
-        data as UpdateIntegrationRequest,
+        data as UpdateIntegrationRequest
       )
       showSnackbar(t('integrations.messages.updated'), 'success')
     } else {
@@ -322,7 +371,7 @@ const handleStatusToggle = async (integration: Integration, isActive: boolean | 
     await integrationsStore.updateIntegrationStatus(integration.id)
     showSnackbar(
       isActive ? t('integrations.messages.activated') : t('integrations.messages.deactivated'),
-      'success',
+      'success'
     )
   } catch (error) {
     console.error('Error updating status:', error)
@@ -330,14 +379,9 @@ const handleStatusToggle = async (integration: Integration, isActive: boolean | 
   }
 }
 
-const getIntegrationsList = async () => {
-  try {
-    await integrationsStore.getIntegrationsList()
-  } catch (error) {
-    console.error('Error loading integrations:', error)
-    showSnackbar(t('integrations.messages.load_error'), 'error')
-  }
-}
+watch(() => integrationsStore.integrationsFilters, () => {
+  debouncedSearch()
+}, { deep: true })
 
 onMounted(() => {
   getIntegrationsList()

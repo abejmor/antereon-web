@@ -1,9 +1,8 @@
-import type { IOCAnalysisResult } from '@/services/strategies/IOCAnalysisStrategy'
+import type { IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 
 export const useExport = () => {
   const exportIOCResults = (results: IOCAnalysisResult[], filename?: string) => {
     if (results.length === 0) {
-      console.warn('No hay resultados para exportar')
       return
     }
 
@@ -20,16 +19,12 @@ export const useExport = () => {
         `"${result.iocValue}"`,
         result.iocType,
         result.provider,
-        new Date().toLocaleString()
+        result.analysisTimestamp ? new Date(result.analysisTimestamp).toLocaleString() : 'N/A'
       ].join(','))
     ].join('\n')
 
     const defaultFilename = `ioc-analysis-${new Date().toISOString().split('T')[0]}.csv`
     downloadCSV(csvContent, filename || defaultFilename)
-  }
-
-  const exportSingleIOCResult = (result: IOCAnalysisResult, filename?: string) => {
-    exportIOCResults([result], filename)
   }
 
   const exportIOCResultsByProvider = (results: IOCAnalysisResult[], provider: string, filename?: string) => {
@@ -38,28 +33,7 @@ export const useExport = () => {
     exportIOCResults(filteredResults, filename || defaultFilename)
   }
 
-  const exportToCSV = (data: Record<string, any>[], headers: string[], filename: string) => {
-    if (data.length === 0) {
-      console.warn('No hay datos para exportar')
-      return
-    }
-
-    const csvContent = [
-      headers.join(','),
-      ...data.map(row =>
-        headers.map(header => {
-          const value = row[header] || ''
-          return typeof value === 'string' && (value.includes(',') || value.includes('"'))
-            ? `"${value.replace(/"/g, '""')}"`
-            : value
-        }).join(',')
-      )
-    ].join('\n')
-
-    downloadCSV(csvContent, filename)
-  }
-
-  const exportToJSON = (data: any, filename: string) => {
+  const exportToJSON = (data: Record<string, unknown>, filename: string) => {
     const jsonContent = JSON.stringify(data, null, 2)
     const blob = new Blob([jsonContent], { type: 'application/json;charset=utf-8;' })
     downloadFile(blob, filename)
@@ -87,9 +61,7 @@ export const useExport = () => {
 
   return {
     exportIOCResults,
-    exportSingleIOCResult,
     exportIOCResultsByProvider,
-    exportToCSV,
     exportToJSON
   }
 }

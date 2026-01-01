@@ -135,7 +135,7 @@ const analysisTools = [
   }
 ]
 
-import { getUserInitials } from '@/helpers/utils'
+import { getUserInitials } from '@/helpers/dateHelpers'
 
 const userInitials = computed(() => {
   return getUserInitials(authStore.user?.name || '')
