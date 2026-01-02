@@ -36,7 +36,7 @@
             variant="outlined"
             density="comfortable"
             clearable
-            @update:model-value="$emit('update:searchInput', $event)"
+            @update:model-value="$emit('update:searchInput', $event ?? '')"
             @keyup.enter="handleAnalyze"
           >
             <template #prepend-inner>
@@ -53,7 +53,12 @@
         >
           <v-btn
             :loading="isLoading"
-            :disabled="!searchInput.trim() || isLoading || !isTypeSupported || (showIntegrationSelector && !selectedIntegrationId)"
+            :disabled="
+              !searchInput.trim() ||
+                isLoading ||
+                !isTypeSupported ||
+                (showIntegrationSelector && !selectedIntegrationId)
+            "
             type="submit"
             color="primary"
             size="large"

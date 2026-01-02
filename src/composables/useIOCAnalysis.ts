@@ -32,20 +32,36 @@ export const useIOCAnalysis = () => {
           const { VirusTotalStrategy } = await import('@/services/strategies/VirusTotalStrategy')
           const virusStrategy = new VirusTotalStrategy(integrationId)
           switch (detectedType) {
-            case 'ip': result = await virusStrategy.analyzeIP(ioc); break
-            case 'domain': result = await virusStrategy.analyzeDomain(ioc); break
-            case 'hash': result = await virusStrategy.analyzeHash(ioc); break
-            case 'url': result = await virusStrategy.analyzeUrl(ioc); break
+            case 'ip':
+              result = await virusStrategy.analyzeIP(ioc)
+              break
+            case 'domain':
+              result = await virusStrategy.analyzeDomain(ioc)
+              break
+            case 'hash':
+              result = await virusStrategy.analyzeHash(ioc)
+              break
+            case 'url':
+              result = await virusStrategy.analyzeUrl(ioc)
+              break
           }
           break
         case 'alienvault':
           const { AlienVaultStrategy } = await import('@/services/strategies/AlienVaultStrategy')
           const alienStrategy = new AlienVaultStrategy(integrationId)
           switch (detectedType) {
-            case 'ip': result = await alienStrategy.analyzeIP(ioc); break
-            case 'domain': result = await alienStrategy.analyzeDomain(ioc); break
-            case 'hash': result = await alienStrategy.analyzeHash(ioc); break
-            case 'url': result = await alienStrategy.analyzeUrl(ioc); break
+            case 'ip':
+              result = await alienStrategy.analyzeIP(ioc)
+              break
+            case 'domain':
+              result = await alienStrategy.analyzeDomain(ioc)
+              break
+            case 'hash':
+              result = await alienStrategy.analyzeHash(ioc)
+              break
+            case 'url':
+              result = await alienStrategy.analyzeUrl(ioc)
+              break
           }
           break
         default:
@@ -54,16 +70,20 @@ export const useIOCAnalysis = () => {
 
       results.value.set(`${integrationId}-${ioc}`, result)
 
+      const analysisTimestamp = new Date().toISOString()
       const savedResult = await iocAnalysisService.create({
-        iocValue:          result.iocValue,
-        iocType:           result.iocType,
-        provider:          result.provider,
-        data:              result.data || {},
-        analysisTimestamp: new Date().toISOString(),
+        iocValue: result.iocValue,
+        iocType:  result.iocType,
+        provider: result.provider,
+        data:     result.data || {},
+        analysisTimestamp,
         ...(result.error && { error: result.error })
       })
-      results.value.set(`${integrationId}-${ioc}`, { ...result, id: savedResult.id })
-
+      results.value.set(`${integrationId}-${ioc}`, {
+        ...result,
+        id: savedResult.id,
+        analysisTimestamp
+      })
     } catch (err) {
       error.value = err instanceof Error ? err.message : 'Analysis failed'
       console.error('Analysis error:', err)
@@ -92,7 +112,7 @@ export const useIOCAnalysis = () => {
   const exportResults = (provider?: string) => {
     const { exportIOCResults } = useExport()
     const resultsToExport = provider
-      ? resultsArray.value.filter(r => r.provider === provider)
+      ? resultsArray.value.filter((r) => r.provider === provider)
       : resultsArray.value
 
     if (resultsToExport.length === 0) return
