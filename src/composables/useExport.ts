@@ -6,29 +6,32 @@ export const useExport = () => {
       return
     }
 
-    const headers = [
-      'IOC',
-      'Type',
-      'Provider',
-      'Analysis Date'
-    ]
+    const headers = ['IOC', 'Type', 'Provider', 'Analysis Date']
 
     const csvContent = [
-      headers.join(','),
-      ...results.map(result => [
-        `"${result.iocValue}"`,
-        result.iocType,
-        result.provider,
-        result.analysisTimestamp ? new Date(result.analysisTimestamp).toLocaleString() : 'N/A'
-      ].join(','))
+      headers.join(';'),
+      ...results.map((result) =>
+        [
+          result.iocValue,
+          result.iocType,
+          result.provider,
+          result.analysisTimestamp
+            ? new Date(result.analysisTimestamp).toLocaleDateString()
+            : 'N/A'
+        ].join(';')
+      )
     ].join('\n')
 
     const defaultFilename = `ioc-analysis-${new Date().toISOString().split('T')[0]}.csv`
     downloadCSV(csvContent, filename || defaultFilename)
   }
 
-  const exportIOCResultsByProvider = (results: IOCAnalysisResult[], provider: string, filename?: string) => {
-    const filteredResults = results.filter(result => result.provider === provider)
+  const exportIOCResultsByProvider = (
+    results: IOCAnalysisResult[],
+    provider: string,
+    filename?: string
+  ) => {
+    const filteredResults = results.filter((result) => result.provider === provider)
     const defaultFilename = `ioc-analysis-${provider}-${new Date().toISOString().split('T')[0]}.csv`
     exportIOCResults(filteredResults, filename || defaultFilename)
   }

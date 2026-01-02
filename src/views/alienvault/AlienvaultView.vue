@@ -37,8 +37,8 @@
           <IOCQuickActions
             :has-results="hasResults"
             data-testid="ioc-quick-actions"
-            @export="exportResults"
-            @clear="clearAllResults"
+            @export="() => exportResults('alienvault')"
+            @clear="clearResults"
           />
         </v-col>
       </v-row>
@@ -103,11 +103,6 @@
 <script setup lang="ts">
 import { useIOCAnalysis } from '@/composables/useIOCAnalysis'
 
-import IOCDetailsModal from '@/components/common/IOCDetailsModal.vue'
-import IOCProviderHeader from '@/components/common/IOCProviderHeader.vue'
-import IOCQuickActions from '@/components/common/IOCQuickActions.vue'
-import IOCSearchForm from '@/components/common/IOCSearchForm.vue'
-
 import type { Integration } from '@/types/integration'
 import type { IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 
@@ -123,11 +118,10 @@ const {
   detectIOCType,
   clearResults,
   removeResult,
-  exportResults: exportResultsComposable
+  exportResults
 } = useIOCAnalysis()
 
 const searchInput = ref('')
-
 const showDetailsModal = ref(false)
 const selectedResult = ref<IOCAnalysisResult | null>(null)
 const selectedIntegration = ref<Integration | null>(null)
@@ -177,13 +171,5 @@ const handleDeleteResult = async (result: IOCAnalysisResult | IOCResultBase) => 
   if (result.id) {
     removeResult(result.id)
   }
-}
-
-const exportResults = () => {
-  exportResultsComposable('alienvault')
-}
-
-const clearAllResults = () => {
-  clearResults()
 }
 </script>

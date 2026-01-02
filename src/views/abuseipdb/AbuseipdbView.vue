@@ -37,7 +37,7 @@
           <IOCQuickActions
             :has-results="hasResults"
             data-testid="ioc-quick-actions"
-            @export="exportResults"
+            @export="() => exportResults('abuseipdb')"
             @clear="clearResults"
           />
         </v-col>

@@ -44,8 +44,8 @@
           <IOCQuickActions
             :has-results="hasResults"
             data-testid="quick-actions"
-            @export="handleExportResults"
-            @clear="clearAllResults"
+            @export="() => exportResults('virustotal')"
+            @clear="clearResults"
           />
         </v-col>
       </v-row>
@@ -185,13 +185,5 @@ const handleDeleteResult = async (result: IOCAnalysisResult | IOCResultBase) => 
   if (result.id) {
     removeResult(result.id)
   }
-}
-
-const handleExportResults = () => {
-  exportResults('virustotal')
-}
-
-const clearAllResults = () => {
-  clearResults()
 }
 </script>
