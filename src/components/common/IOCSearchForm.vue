@@ -151,4 +151,8 @@ const handleAnalyze = () => {
 const handleIntegrationSelected = (integration: Integration | null) => {
   emit('integration-selected', integration)
 }
+
+watch(() => props.provider, () => {
+  selectedIntegrationId.value = null
+})
 </script>
