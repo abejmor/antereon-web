@@ -146,6 +146,15 @@ watch(
   { immediate: true }
 )
 
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (newValue === null && availableIntegrations.value.length > 0) {
+      handleSelectionChange(availableIntegrations.value[0].id)
+    }
+  }
+)
+
 onMounted(() => {
   if (integrationsStore.integrationsList.length === 0) {
     integrationsStore.getIntegrationsList()
