@@ -1,14 +1,14 @@
 <template>
   <div
-    class="abuseipdb-view"
-    data-testid="abuseipdb-view"
+    :class="`${provider}-view`"
+    :data-testid="`${provider}-view`"
   >
     <v-container fluid>
       <IOCProviderHeader
-        :title="t('abuseipdb.title')"
-        :description="t('abuseipdb.description')"
-        icon="mdi-security"
-        data-testid="ioc-provider-header"
+        :title="t(`${provider}.title`)"
+        :description="t(`${provider}.description`)"
+        :icon="providerConfig.icon"
+        data-testid="provider-header"
       />
 
       <v-row class="mb-6">
@@ -21,8 +21,8 @@
             :is-loading="isAnalyzing"
             :error="error"
             :detected-type="detectedType"
-            :provider="'abuseipdb'"
-            :analyze-button-text="t('abuseipdb.analyze_button')"
+            :provider="provider"
+            :analyze-button-text="t(`${provider}.analyze_button`)"
             :show-integration-selector="true"
             data-testid="search-form"
             @analyze="handleAnalyze"
@@ -36,8 +36,8 @@
         >
           <IOCQuickActions
             :has-results="hasResults"
-            data-testid="ioc-quick-actions"
-            @export="() => exportResults('abuseipdb')"
+            data-testid="quick-actions"
+            @export="() => exportResults(provider)"
             @clear="clearResults"
           />
         </v-col>
@@ -85,10 +85,10 @@
         :has-results="hasResults"
         :is-loading="isAnalyzing"
         :title="t('common.no_analysis_yet')"
-        :description="t('abuseipdb.description')"
+        :description="t(`${provider}.description`)"
         :supported-types-title="t('common.supported_types')"
-        icon="mdi-security"
-        provider="abuseipdb"
+        :icon="providerConfig.icon"
+        :provider="provider"
       />
     </v-container>
 
@@ -104,9 +104,30 @@
 import { useIOCAnalysis } from '@/composables/useIOCAnalysis'
 
 import type { Integration } from '@/types/integration'
-import type { IOCAnalysisResult } from '@/types/strategies/IOCAnalysisStrategy'
 
-import { iocAnalysisService, type IOCResultBase } from '@/services/iocAnalysisService'
+import {
+  iocAnalysisService,
+  type IOCResultBase,
+  type IOCAnalysisResult
+} from '@/services/iocAnalysisService'
+
+type ProviderType = 'virustotal' | 'abuseipdb' | 'alienvault'
+
+interface ProviderConfig {
+  icon: string
+}
+
+const PROVIDER_CONFIGS: Record<ProviderType, ProviderConfig> = {
+  virustotal: { icon: 'mdi-virus' },
+  abuseipdb:  { icon: 'mdi-security' },
+  alienvault: { icon: 'mdi-alien' }
+}
+
+const props = defineProps<{
+  provider: ProviderType
+}>()
+
+const providerConfig = computed(() => PROVIDER_CONFIGS[props.provider])
 
 const { t } = useI18n()
 const {
@@ -131,45 +152,34 @@ const detectedType = computed(() => {
   return detectIOCType(searchInput.value.trim())
 })
 
-watch(searchInput, () => {
-  if (error.value) {
-    error.value = null
-  }
-})
-
 const handleAnalyze = async () => {
-  if (!searchInput.value.trim() || isAnalyzing.value) return
+  if (!searchInput.value.trim() || isAnalyzing.value || !selectedIntegration.value) return
 
-  try {
-    const provider = selectedIntegration.value?.id || 'abuseipdb'
-    await analyzeIOC(searchInput.value.trim(), provider)
-  } catch (err) {
-    console.error('Error analyzing IOC:', err)
-  }
+  await analyzeIOC(searchInput.value.trim(), selectedIntegration.value.id)
 }
 
 const handleIntegrationSelected = (integration: Integration | null) => {
   selectedIntegration.value = integration
 }
 
-const openDetailsModal = async (result: IOCAnalysisResult | IOCResultBase) => {
-  try {
-    const fullResult = await iocAnalysisService.getById(result.id!)
-    selectedResult.value = fullResult as any
-    showDetailsModal.value = true
-  } catch (err) {
-    console.error('Error loading result details:', err)
-  }
-}
-
-const handleDeleteResult = async (result: IOCAnalysisResult | IOCResultBase) => {
-  if (result.id) {
-    removeResult(result.id)
-  }
+const openDetailsModal = async (result: IOCResultBase) => {
+  const fullResult = await iocAnalysisService.getById(result.id)
+  selectedResult.value = fullResult
+  showDetailsModal.value = true
 }
 
 const closeDetailsModal = () => {
   showDetailsModal.value = false
   selectedResult.value = null
 }
+
+const handleDeleteResult = (result: IOCResultBase) => {
+  removeResult(result.id)
+}
+
+watch(searchInput, () => {
+  if (error.value) {
+    error.value = null
+  }
+})
 </script>
