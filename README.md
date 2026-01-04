@@ -12,14 +12,32 @@ Official frontend for Antereon, a cybersecurity intelligence platform for IOC an
 ### Installation
 
 ```bash
-# 1. Install Dependencies
+# 1. Configure Environment Variables
+cp .env.example .env.development
+# Edit .env.development if needed (default: http://localhost:3000)
+
+# 2. Install Dependencies
 yarn install --frozen-lockfile
 
-# 2. Run Development Server
+# 3. Run Development Server
 yarn serve
 ```
 
 The application will be available at `http://localhost:5173`.
+
+## Production Deployment
+
+```bash
+# 1. Configure Production Environment
+cp .env.example .env.production
+# Edit .env.production with your production API URL
+
+# 2. Build for Production
+yarn build
+
+# 3. Preview Production Build
+yarn preview
+```
 
 ## Testing
 
