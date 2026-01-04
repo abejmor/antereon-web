@@ -63,7 +63,7 @@
             </div>
             <div>
               <div class="text-h3 font-weight-bold mb-2">
-                AES-CBC
+                AES-256-GCM
               </div>
               <div class="text-subtitle-2">
                 {{ t('landing.cta_section.metrics.encryption') }}
