@@ -15,6 +15,7 @@ coverage
 *.local
 
 # Environment files
+.env
 .env.development
 .env.production
 .env.local
