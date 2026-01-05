@@ -14,7 +14,6 @@ Official frontend for Antereon, a cybersecurity intelligence platform for IOC an
 ```bash
 # 1. Configure Environment Variables
 cp .env.example .env.development
-# Edit .env.development if needed (default: http://localhost:3000)
 
 # 2. Install Dependencies
 yarn install --frozen-lockfile
