@@ -143,7 +143,7 @@
           <v-btn
             color="primary"
             class="mt-4"
-            to="/virustotal"
+            to="/analysis"
           >
             {{ t('history.perform_analysis') }}
           </v-btn>
@@ -162,7 +162,11 @@
 <script setup lang="ts">
 import { useDebounceFn } from '@vueuse/core'
 
-import { iocAnalysisService, type IOCAnalysisResult, type IOCResultBase } from '@/services/iocAnalysisService'
+import {
+  iocAnalysisService,
+  type IOCAnalysisResult,
+  type IOCResultBase
+} from '@/services/iocAnalysisService'
 
 const { t } = useI18n()
 
@@ -282,9 +286,13 @@ const handlePageChange = (page: number) => {
   loadHistoryData()
 }
 
-watch(filters, () => {
-  debouncedSearch()
-}, { deep: true })
+watch(
+  filters,
+  () => {
+    debouncedSearch()
+  },
+  { deep: true }
+)
 
 onMounted(() => {
   loadHistoryData()
