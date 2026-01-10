@@ -45,7 +45,8 @@ yarn preview
 yarn test:unit
 
 # E2E Tests (Headless)
-# Note: Requires having development env running both backend and frontend
+# Note: Requires having development env running both backend and frontend, and a build if no previous one
+yarn build
 yarn serve
 yarn test:e2e
 
