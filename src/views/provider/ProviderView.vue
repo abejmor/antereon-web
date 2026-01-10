@@ -37,7 +37,7 @@
           <IOCQuickActions
             :has-results="hasResults"
             data-testid="quick-actions"
-            @export="() => exportResults(provider)"
+            @export="() => exportResults()"
             @clear="clearResults"
           />
         </v-col>
