@@ -74,7 +74,7 @@ describe('authentication flow', () => {
       cy.visit('/profile')
       cy.url().should('include', '/register')
 
-      cy.visit('/virustotal')
+      cy.visit('/analysis')
       cy.url().should('include', '/register')
     })
   })

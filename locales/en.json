@@ -1,593 +1,601 @@
 {
-    "top_bar": {
-        "login": "Log In",
-        "logout": "Log Out"
-    },
-    "landing": {
-        "hero_section": {
-            "heading_prefix": "IOC",
-            "heading_highlight": "Intelligence",
-            "heading_suffix": "Platform",
-            "description": "Antereon centralizes and automates the investigation of Indicators of Compromise (IOCs) such as IP addresses, domains, file hashes, and URLs for cybersecurity analysts.",
-            "login_button": "Log In",
-            "register_button": "Register",
-            "byoa_model": "BYOA Model",
-            "apis_integrated": "3 APIs Integrated",
-            "platform_title": "Antereon Intelligence",
-            "status_live": "LIVE",
-            "dashboard": {
-                "threat_stats": {
-                    "title": "Threat Statistics",
-                    "total_searches": "Total Searches",
-                    "total_integrations": "Total Integrations",
-                    "ioc_analyses": "IOC Analyses",
-                    "active_apis": "Active APIs"
-                },
-                "provider_stats": {
-                    "title": "Analysis by Provider",
-                    "virustotal": "VirusTotal",
-                    "alienvault": "AlienVault",
-                    "abuseipdb": "AbuseIPDB"
-                },
-                "ioc_type_stats": {
-                    "title": "Analysis by IOC Type",
-                    "domains": "Domains",
-                    "ips": "IPs",
-                    "hashes": "Hashes"
-                },
-                "ioc_stats": {
-                    "title": "IOC Analysis by Type",
-                    "domains": "Domains",
-                    "ips": "IP Addresses",
-                    "hashes": "File Hashes"
-                }
-            },
-            "buttons": {
-                "start_analysis": "Start Analysis",
-                "api_management": "API Management"
-            }
+  "top_bar": {
+    "login": "Log In",
+    "logout": "Log Out"
+  },
+  "landing": {
+    "hero_section": {
+      "heading_prefix": "IOC",
+      "heading_highlight": "Intelligence",
+      "heading_suffix": "Platform",
+      "description": "Antereon centralizes and automates the investigation of Indicators of Compromise (IOCs) such as IP addresses, domains, file hashes, and URLs for cybersecurity analysts.",
+      "login_button": "Log In",
+      "register_button": "Register",
+      "byoa_model": "BYOA Model",
+      "apis_integrated": "3 APIs Integrated",
+      "platform_title": "Antereon Intelligence",
+      "status_live": "LIVE",
+      "dashboard": {
+        "threat_stats": {
+          "title": "Threat Statistics",
+          "total_searches": "Total Searches",
+          "total_integrations": "Total Integrations",
+          "ioc_analyses": "IOC Analyses",
+          "active_apis": "Active APIs"
         },
-        "features_section": {
-            "title": "Intelligence Services",
-            "description": "Antereon integrates with top-tier cybersecurity intelligence providers to investigate IOCs",
-            "virus_total": {
-                "title": "VirusTotal",
-                "description": "Comprehensive analysis of IPs, domains, hashes, and URLs across 94 security engines with detailed reputation data.",
-                "features": ["Security Engines", "Reputation", "WHOIS"]
-            },
-            "abuse_ipdb": {
-                "title": "AbuseIPDB",
-                "description": "IP reputation service providing abuse reports, categorization, and detailed insights on malicious IP addresses.",
-                "features": ["Abuse Score", "Country", "ISP", "Detailed Reports"]
-            },
-            "alienvault_otx": {
-                "title": "AlienVault OTX",
-                "description": "Open Threat Exchange platform delivering community-powered threat intelligence with detailed pulses and geolocations.",
-                "features": ["Threat Pulses", "Geolocation", "ASN", "Whitelist"]
-            }
+        "provider_stats": {
+          "title": "Analysis by Provider",
+          "virustotal": "VirusTotal",
+          "alienvault": "AlienVault",
+          "abuseipdb": "AbuseIPDB"
         },
-        "how_works_section": {
-            "title": "How Antereon Works",
-            "description": "Leveraging our BYOA (Bring Your Own API Key) model to investigate IOCs securely",
-            "cta_button": "Start Your Security Research",
-            "steps": {
-                "register": {
-                    "title": "Register",
-                    "content": "Create your account to access the cybersecurity intelligence platform for IOC analysis."
-                },
-                "add_api_keys": {
-                    "title": "Add API Keys",
-                    "content": "Add your own API keys from VirusTotal, AbuseIPDB, or AlienVault OTX. Keys are securely encrypted."
-                },
-                "submit_iocs": {
-                    "title": "Submit IOCs",
-                    "content": "Investigate indicators of compromise such as IP addresses, domains, file hashes, or URLs."
-                },
-                "analyze_results": {
-                    "title": "Analyze Results",
-                    "content": "Get comprehensive reports from multiple intelligence sources to make informed security decisions."
-                }
-            }
+        "ioc_type_stats": {
+          "title": "Analysis by IOC Type",
+          "domains": "Domains",
+          "ips": "IPs",
+          "hashes": "Hashes"
         },
-        "cta_section": {
-            "title": "Ready to Accelerate Your IOC Analysis?",
-            "description": "Join security analysts who trust Antereon to centralize and streamline their threat intelligence operations. Start investigating IOCs more efficiently today.",
-            "register_button": "Register Now",
-            "api_docs_button": "API Documentation",
-            "by_registering": "By registering, you agree to our",
-            "privacy_policy": "Privacy Policy",
-            "metrics": {
-                "services": "Intelligence Services",
-                "byoa": "BYOA Implementation",
-                "encryption": "API Key Encryption"
-            }
+        "ioc_stats": {
+          "title": "IOC Analysis by Type",
+          "domains": "Domains",
+          "ips": "IP Addresses",
+          "hashes": "File Hashes"
         }
+      },
+      "buttons": {
+        "start_analysis": "Start Analysis",
+        "api_management": "API Management"
+      }
     },
-    "auth": {
-        "login": {
-            "title": "Sign In",
-            "email_label": "Email",
-            "password_label": "Password",
-            "submit_button": "Sign In",
-            "no_account": "Don't have an account?",
-            "register_link": "Sign Up",
-            "success": "Login successful! Redirecting...",
-            "error": {
-                "generic": "Invalid email or password. Please try again."
-            }
-        },
+    "features_section": {
+      "title": "Intelligence Services",
+      "description": "Antereon integrates with top-tier cybersecurity intelligence providers to investigate IOCs",
+      "virus_total": {
+        "title": "VirusTotal",
+        "description": "Comprehensive analysis of IPs, domains, hashes, and URLs across 94 security engines with detailed reputation data.",
+        "features": ["Security Engines", "Reputation", "WHOIS"]
+      },
+      "abuse_ipdb": {
+        "title": "AbuseIPDB",
+        "description": "IP reputation service providing abuse reports, categorization, and detailed insights on malicious IP addresses.",
+        "features": ["Abuse Score", "Country", "ISP", "Detailed Reports"]
+      },
+      "alienvault_otx": {
+        "title": "AlienVault OTX",
+        "description": "Open Threat Exchange platform delivering community-powered threat intelligence with detailed pulses and geolocations.",
+        "features": ["Threat Pulses", "Geolocation", "ASN", "Whitelist"]
+      }
+    },
+    "how_works_section": {
+      "title": "How Antereon Works",
+      "description": "Leveraging our BYOA (Bring Your Own API Key) model to investigate IOCs securely",
+      "cta_button": "Start Your Security Research",
+      "steps": {
         "register": {
-            "title": "Create an Account",
-            "name_label": "Full Name",
-            "email_label": "Email",
-            "password_label": "Password",
-            "confirm_password_label": "Confirm Password",
-            "submit_button": "Register",
-            "already_have_account": "Already have an account?",
-            "login_link": "Log In",
-            "success": "Registration successful! Redirecting...",
-            "error": {
-                "generic": "An error occurred during registration. Please try again."
-            }
+          "title": "Register",
+          "content": "Create your account to access the cybersecurity intelligence platform for IOC analysis."
+        },
+        "add_api_keys": {
+          "title": "Add API Keys",
+          "content": "Add your own API keys from VirusTotal, AbuseIPDB, or AlienVault OTX. Keys are securely encrypted."
+        },
+        "submit_iocs": {
+          "title": "Submit IOCs",
+          "content": "Investigate indicators of compromise such as IP addresses, domains, file hashes, or URLs."
+        },
+        "analyze_results": {
+          "title": "Analyze Results",
+          "content": "Get comprehensive reports from multiple intelligence sources to make informed security decisions."
         }
+      }
     },
-    "sidebar": {
-        "home": "Home",
-        "integrations": "Integrations",
-        "profile": "Profile",
-        "analysis": "Analysis",
-        "analysis_tools": "Analysis Tools",
-        "virustotal": "VirusTotal",
-        "alienvault": "AlienVault OTX",
-        "abuseipdb": "AbuseIPDB",
-        "settings": "Settings",
-        "history": "History"
+    "cta_section": {
+      "title": "Ready to Accelerate Your IOC Analysis?",
+      "description": "Join security analysts who trust Antereon to centralize and streamline their threat intelligence operations. Start investigating IOCs more efficiently today.",
+      "register_button": "Register Now",
+      "api_docs_button": "API Documentation",
+      "by_registering": "By registering, you agree to our",
+      "privacy_policy": "Privacy Policy",
+      "metrics": {
+        "services": "Intelligence Services",
+        "byoa": "BYOA Implementation",
+        "encryption": "API Key Encryption"
+      }
+    }
+  },
+  "auth": {
+    "login": {
+      "title": "Sign In",
+      "email_label": "Email",
+      "password_label": "Password",
+      "submit_button": "Sign In",
+      "no_account": "Don't have an account?",
+      "register_link": "Sign Up",
+      "success": "Login successful! Redirecting...",
+      "error": {
+        "generic": "Invalid email or password. Please try again."
+      }
     },
-    "virustotal": {
-        "title": "VirusTotal Analysis",
-        "description": "Analyze files and URLs for malicious content using VirusTotal's comprehensive scanning engines.",
-        "analyze_button": "Analyze",
-        "analyzing": "Analyzing...",
-        "error": "Error during analysis",
-        "no_results": "No results found"
+    "register": {
+      "title": "Create an Account",
+      "name_label": "Full Name",
+      "email_label": "Email",
+      "password_label": "Password",
+      "confirm_password_label": "Confirm Password",
+      "submit_button": "Register",
+      "already_have_account": "Already have an account?",
+      "login_link": "Log In",
+      "success": "Registration successful! Redirecting...",
+      "error": {
+        "generic": "An error occurred during registration. Please try again."
+      }
+    }
+  },
+  "sidebar": {
+    "home": "Home",
+    "integrations": "Integrations",
+    "profile": "Profile",
+    "analysis": "Analysis",
+    "analysis_tools": "Analysis Tools",
+    "virustotal": "VirusTotal",
+    "alienvault": "AlienVault OTX",
+    "abuseipdb": "AbuseIPDB",
+    "settings": "Settings",
+    "history": "History"
+  },
+  "analysis": {
+    "title": "IOC Analysis",
+    "description": "Analyze Indicators of Compromise across multiple threat intelligence providers",
+    "empty_state_description": "Start by selecting a provider and entering an IOC to analyze"
+  },
+  "virustotal": {
+    "title": "VirusTotal Analysis",
+    "description": "Analyze files and URLs for malicious content using VirusTotal's comprehensive scanning engines.",
+    "analyze_button": "Analyze",
+    "analyzing": "Analyzing...",
+    "error": "Error during analysis",
+    "no_results": "No results found"
+  },
+  "alienvault": {
+    "title": "AlienVault OTX Analysis",
+    "description": "Analyze IPs, domains, URLs and file hashes using AlienVault's Open Threat Exchange platform.",
+    "analyze_button": "Analyze",
+    "analyzing": "Analyzing...",
+    "error": "Error during analysis",
+    "no_results": "No results found"
+  },
+  "home": {
+    "welcome": "Welcome",
+    "subtitle": "Your cybersecurity intelligence dashboard",
+    "statistics": {
+      "title": "Statistics",
+      "loading": "Loading statistics...",
+      "total_searches": "Total Searches",
+      "this_month": "This Month",
+      "threats_detected": "Threats Detected",
+      "clean_results": "Clean Results",
+      "active_integrations": "Active Integrations",
+      "total_integrations": "Total Integrations",
+      "top_provider": "Top Provider",
+      "empty": "No statistics available"
     },
-    "alienvault": {
-        "title": "AlienVault OTX Analysis",
-        "description": "Analyze IPs, domains, URLs and file hashes using AlienVault's Open Threat Exchange platform.",
-        "analyze_button": "Analyze",
-        "analyzing": "Analyzing...",
-        "error": "Error during analysis",
-        "no_results": "No results found"
+    "global_statistics": {
+      "title": "Global Platform Statistics",
+      "loading": "Loading global statistics...",
+      "error": "Error loading global statistics",
+      "retry": "Retry",
+      "total_searches": "Total Searches",
+      "active_integrations": "Active Integrations",
+      "total_integrations": "Total Integrations"
     },
-    "home": {
-        "welcome": "Welcome",
-        "subtitle": "Your cybersecurity intelligence dashboard",
-        "statistics": {
-            "title": "Statistics",
-            "loading": "Loading statistics...",
-            "total_searches": "Total Searches",
-            "this_month": "This Month",
-            "threats_detected": "Threats Detected",
-            "clean_results": "Clean Results",
-            "active_integrations": "Active Integrations",
-            "total_integrations": "Total Integrations",
-            "top_provider": "Top Provider",
-            "empty": "No statistics available"
-        },
-        "global_statistics": {
-            "title": "Global Platform Statistics",
-            "loading": "Loading global statistics...",
-            "error": "Error loading global statistics",
-            "retry": "Retry",
-            "total_searches": "Total Searches",
-            "active_integrations": "Active Integrations",
-            "total_integrations": "Total Integrations"
-        },
-        "quick_actions": {
-            "virustotal": {
-                "title": "VirusTotal",
-                "description": "Analyze IPs, domains, hashes and URLs"
-            },
-            "abuseipdb": {
-            "title": "AbuseIPDB",
-            "description": "Check IP reputation and abuse reports"
-        },
-            "alienvault": {
-                "title": "AlienVault OTX",
-                "description": "Threat intelligence and IOC analysis"
-            }
-        },
-        "quick_search": {
-            "title": "Quick Search",
-            "placeholder": "Enter IP, domain, hash or URL...",
-            "search_button": "Search",
-            "types": {
-                "auto": "Auto Detect",
-                "ip": "IP Address",
-                "domain": "Domain",
-                "hash": "Hash",
-                "url": "URL"
-            }
-        },
-        "integrations": {
-            "title": "Integrations",
-            "view_all": "View all",
-            "no_integrations": "No integrations available",
-            "no_integrations_description": "You haven't configured any integrations yet. Add your first integration to get started.",
-            "add_first": "Add your first integration",
-            "loading": "Loading integrations..."
-        }
+    "quick_actions": {
+      "virustotal": {
+        "title": "VirusTotal",
+        "description": "Analyze IPs, domains, hashes and URLs"
+      },
+      "abuseipdb": {
+        "title": "AbuseIPDB",
+        "description": "Check IP reputation and abuse reports"
+      },
+      "alienvault": {
+        "title": "AlienVault OTX",
+        "description": "Threat intelligence and IOC analysis"
+      }
     },
-    "integrations": {
-        "title": "Integrations",
-        "loading": "Loading integrations...",
-        "filter_by_status": "Filter by status",
-        "manage_description": "Manage integrations with external security tools",
-        "new_integration": "New Integration",
-        "total": "Total",
-        "active": "Active",
-        "inactive": "Inactive",
-        "with_errors": "With Errors",
-        "search_placeholder": "Search integrations",
-        "search_by_name": "Search by name or provider",
-        "status_filter": "Status",
-        "provider_filter": "Provider",
-        "loading_integrations": "Loading integrations...",
-        "no_integrations": "No integrations",
-        "create_first": "Create your first integration to get started",
-        "no_results": "No results found",
-        "adjust_filters": "Try adjusting the search filters",
-        "edit_action": "Edit",
-        "test_connection": "Test Connection",
-        "delete_action": "Delete",
-        "connection_success": "Connection successful",
-        "connection_error": "Connection error",
-        "test_error": "Error testing connection",
-         "close": "Close",
-
-        "status": {
-            "active": "Active",
-            "inactive": "Inactive",
-            "error": "Error",
-            "unknown": "Unknown",
-            "label": "Status"
-        },
-        "configure": "Configure",
-        "usage_count": "Used {count} times",
-        "add_integration": "Add Integration",
-        "edit_integration": "Edit Integration",
-        "delete_integration": "Delete Integration",
-        "api_key": "API Key",
-        "provider": "Provider",
-        "custom_integration": "Custom integration",
-        "website": "Website",
-        "not_available": "N/A",
-        "last_updated": "Last Updated",
-        "name": "Name",
-        "created_at": "Created",
-        "updated_at": "Updated",
-        "actions": "Actions",
-        "table": {
-            "name": "Name",
-            "provider": "Provider",
-            "status": "Status",
-            "created_at": "Created",
-            "updated_at": "Updated",
-            "actions": "Actions",
-            "created": "Created"
-        },
-        "messages": {
-            "error": "An error occurred while processing the request",
-            "load_error": "Error loading integrations",
-            "activated": "Integration activated successfully",
-            "deactivated": "Integration deactivated successfully",
-            "created": "Integration created successfully",
-            "updated": "Integration updated successfully",
-            "deleted": "Integration deleted successfully"
-        },
-        "delete": {
-            "title": "Delete Integration",
-            "message": "Are you sure you want to delete this integration? This action cannot be undone."
-        },
-        "form": {
-            "title_add": "Add Integration",
-            "title_edit": "Edit Integration",
-            "name_label": "Integration Name",
-            "provider_label": "Provider",
-            "provider_info": "Provider Information",
-            "active_label": "Active",
-            "active_hint": "Enable or disable this integration",
-            "default_label": "Set as default",
-            "default_hint": "Use this integration as the default for this provider",
-            "configuration": "Configuration",
-            "save_button": "Save Integration",
-            "update_button": "Update Integration",
-            "create_button": "Create Integration",
-            "cancel_button": "Cancel",
-            "default_hint_disabled": "Default integration cannot be disabled",
-            "validation": {
-                "name_required": "Name is required",
-                "name_min_length": "Name must be at least 3 characters",
-                "name_max_length": "Name cannot exceed 50 characters",
-                "provider_required": "You must select a provider",
-                "field_required": "{field} is required",
-                "invalid_url": "Must be a valid URL"
-            },
-            "placeholder": {
-                "name_placeholder": "My new integration",
-                "provider_placeholder": "Select a provider",
-                "api_key_saved": "API key is securely saved (click eye to view/edit)"
-            },
-            "hint": {
-                "api_key_optional": "Leave empty to keep the current API key, or enter a new one to update it"
-            }
-         },
-        "providers": {
-            "virustotal": {
-                "name": "VirusTotal",
-                "description": "Analyze suspicious files, domains, IPs and URLs to detect malware and other breaches",
-                "api_key_label": "API Key",
-                "api_key_placeholder": "Enter your VirusTotal API key",
-                "api_key_description": "Get your API key from VirusTotal console"
-            },
-            "abuseipdb": {
-                "name": "AbuseIPDB",
-                "description": "Check IP addresses against a database of IPs associated with malicious activity",
-                "api_key_label": "API Key",
-                "api_key_placeholder": "Enter your AbuseIPDB API key",
-                "api_key_description": "Get your API key from AbuseIPDB account settings"
-            },
-            "alienvault": {
-                "name": "AlienVault OTX",
-                "description": "Access threat intelligence data from the Open Threat Exchange",
-                "api_key_label": "API Key",
-                "api_key_placeholder": "Enter your AlienVault OTX API key",
-                "api_key_description": "Get your API key from AlienVault OTX settings"
-            }
-        }
-    },
-    "profile": {
-        "title": "Profile Settings",
-        "subtitle": "Manage your account settings and preferences",
-        "edit_profile": {
-            "title": "Edit Profile",
-            "name": "Name",
-            "email": "Email",
-            "save_button": "Save Changes",
-            "success_message": "Profile updated successfully",
-            "error_message": "Error updating profile. Please try again."
-        },
-        "user_info": {
-            "title": "User Information",
-            "name": "Name",
-            "email": "Email",
-            "edit_button": "Edit Profile"
-        },
-        "theme": {
-            "title": "Theme Settings",
-            "description": "Choose your preferred theme for the application",
-            "selector_label": "Select Theme",
-            "select_label": "Select Theme",
-            "options": {
-                "antereonDark": "Dark Theme",
-                "antereonLight": "Light Theme"
-            }
-        },
-        "change_password": {
-            "title": "Change Password",
-            "description": "Update your account password",
-            "current_password": "Current Password",
-            "new_password": "New Password",
-            "confirm_password": "Confirm New Password",
-            "save_button": "Change Password",
-            "success_message": "Password changed successfully",
-            "error_message": "Error changing password. Please try again."
-        },
-        "password": {
-            "title": "Password",
-            "description": "Change your account password",
-            "change_button": "Change Password"
-        },
-        "validation": {
-            "name_required": "Name is required",
-            "name_min_length": "Name must be at least 2 characters",
-            "email_required": "Email is required",
-            "email_invalid": "Please enter a valid email address",
-            "current_password_required": "Current password is required",
-            "new_password_required": "New password is required",
-            "password_min_length": "Password must be at least 8 characters",
-            "confirm_password_required": "Please confirm your password",
-            "passwords_not_match": "Passwords do not match"
-        },
-        "messages": {
-            "profile_updated": "Profile updated successfully",
-            "profile_update_error": "Error updating profile. Please try again.",
-            "password_changed": "Password changed successfully",
-            "password_change_error": "Error changing password. Please try again."
-        }
-    },
-    "history": {
-        "title": "Analysis History",
-        "description": "Review all previously performed IOC analyses",
-        "loading": "Loading history...",
-        "no_results": "No saved analyses",
-        "no_results_description": "Analyses you perform will automatically appear here",
-        "perform_analysis": "Perform Analysis",
-        "clear_all": "Clear All",
-        "filters": {
-            "provider": "Provider",
-            "ioc_type": "IOC Type",
-            "search_ioc": "Search IOC"
-        },
-        "status": {
-            "success": "Success",
-            "error": "Error"
-        },
-        "providers": {
-            "virustotal": "VirusTotal",
-            "abuseipdb": "AbuseIPDB",
-            "alienvault": "AlienVault OTX"
-        },
-        "ioc_types": {
-            "ip": "IP",
-            "domain": "Domain",
-            "hash": "Hash",
-            "url": "URL"
-        },
-        "card": {
-            "view_details": "View Details",
-            "delete": "Delete",
-            "analyzed_on": "Analyzed on",
-            "analysis": "Analysis",
-            "saved": "Saved",
-            "detections": "Detections",
-            "confidence": "Confidence",
-            "provider": "Provider",
-            "type": "Type",
-            "value": "Value",
-            "country": "Country",
-            "asn": "ASN",
-            "pulses": "Pulses",
-            "status": {
-                 "clean": "Clean",
-                 "malicious": "Malicious",
-                 "suspicious": "Suspicious",
-                 "unknown": "Unknown",
-                 "success": "Success",
-                 "error": "Error",
-                 "pending": "Pending"
-             },
-            "ioc_type": {
-                "ip": "IP Address",
-                "domain": "Domain",
-                "hash": "Hash",
-                "url": "URL"
-            }
-        },
-        "modal": {
-            "saved_date": "Saved Date",
-            "analysis_data": "Analysis Data",
-            "error_details": "Error Details",
-            "title": "Analysis Details",
-            "analysis_details": "Analysis Details",
-            "analysis": "Analysis",
-            "copy": "Copy",
-            "copied": "Copied",
-            "json_data": "JSON Data",
-            "basic_info": "Basic Information",
-            "ioc_value": "IOC Value",
-            "ioc_type": "IOC Type",
-            "provider": "Provider",
-            "status": "Status",
-            "analyzed_at": "Analyzed At",
-            "saved_at": "Saved At",
-            "analysis_results": "Analysis Results",
-            "malicious": "Malicious",
-            "suspicious": "Suspicious",
-            "clean": "Clean",
-            "confidence": "Confidence",
-            "abuse_confidence": "Abuse Confidence",
-            "country": "Country",
-            "usage_type": "Usage Type",
-            "isp": "ISP",
-            "raw_data": "Raw Data",
-            "error": "Error",
-            "detection_details": "Detection Details",
-            "detection_rate": "detection rate",
-            "metadata": "Metadata",
-            "additional_info": "Additional Information",
-            "virustotal_description": "This analysis was performed using VirusTotal, a service that analyzes files and URLs for malicious content using multiple antivirus engines.",
-            "alienvault_description": "This analysis was performed using AlienVault OTX, a threat intelligence platform that provides information about malicious IPs, domains, URLs and file hashes.",
-            "view_on_virustotal": "View on VirusTotal",
-            "view_on_alienvault": "View on AlienVault OTX",
-            "whois": "WHOIS Information",
-            "export": "Export",
-            "close": "Close",
-            "delete": "Delete"
-        },
-        "messages": {
-            "delete_success": "Analysis deleted successfully",
-            "delete_error": "Error deleting analysis",
-            "clear_success": "History cleared successfully",
-            "clear_error": "Error clearing history",
-            "load_error": "Error loading history"
-        }
-    },
-    "common": {
-        "cancel": "Cancel",
-        "delete": "Delete",
-        "confirm": "Confirm",
-        "save": "Save",
-        "edit": "Edit",
-        "close": "Close",
-        "actions": "Actions",
-        "search_ioc": "Search IOC",
-        "enter_ioc": "Enter IOC (IP, domain, hash, or URL)",
-        "ioc_examples": "Examples: 8.8.8.8, google.com, d41d8cd98f00b204e9800998ecf8427e",
-        "quick_actions": "Quick Actions",
-        "no_analysis_yet": "No analysis performed yet",
-        "export_results": "Export Results",
-        "clear_all": "Clear All",
-        "supported_types": "Supported Types",
-        "analysis_results": "Analysis Results",
-        "detected_type": "Detected Type",
-        "result": "result | results",
-        "not_supported": "Not Supported",
-        "select_integration": "Select Integration",
-        "select_integration_placeholder": "Choose an integration to use",
-        "no_integrations_available": "No integrations available for this provider",
-        "add_integration": "Add Integration",
-        "default": "Default",
-        "and": "and",
-        "back_to_home": "Back to Home"
-    },
-    "abuseipdb": {
-        "title": "AbuseIPDB IP Analysis",
-        "description": "Analyze IP addresses against AbuseIPDB's database of malicious IPs reported by users worldwide. Only IP addresses are supported.",
-        "analyze_button": "Analyze IP"
-    },
-    "ioc_type": {
+    "quick_search": {
+      "title": "Quick Search",
+      "placeholder": "Enter IP, domain, hash or URL...",
+      "search_button": "Search",
+      "types": {
+        "auto": "Auto Detect",
         "ip": "IP Address",
         "domain": "Domain",
         "hash": "Hash",
-        "url": "URL",
-        "unknown": "Unknown"
+        "url": "URL"
+      }
     },
-    "validations": {
-        "email": "Email is required",
-        "password": "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and may include special characters",
-        "minLength": "Must be at least {length} characters",
-        "maxLength": "Must be at most {length} characters",
-        "required": "Field is required",
-        "passwords_no_match": "Passwords must match",
-        "invalid_url": "Invalid URL"
-    },
-    "privacy_policy": {
-        "title": "Privacy Policy",
-        "last_updated": "Last updated: January 2026",
-        "introduction": {
-            "title": "Introduction",
-            "content": "This Privacy Policy explains how Antereon collects, uses, and protects your information when you use our threat intelligence platform."
-        },
-        "data_collection": {
-            "title": "What Information We Collect",
-            "content": "When you create an account, we collect your email address, username, and encrypted password. We also save your theme preference (light or dark mode) in your browser's local storage to remember your choice."
-        },
-        "data_usage": {
-            "title": "How We Use Your Information",
-            "content": "We use your email and password to authenticate your account and provide access to our platform. Your theme preference is stored locally to maintain your visual preferences across sessions. We do not track your activity or share your information with third parties."
-        },
-        "data_storage": {
-            "title": "Data Storage",
-            "content": "Your account information is securely stored on our servers with encrypted passwords. Your authentication token and theme preference are stored in your browser's local storage for functionality purposes. We do not use cookies."
-        },
-        "your_rights": {
-            "title": "Your Rights",
-            "content": "You can view and update your account information at any time through your profile settings. If you want to delete your account, please contact us through our support system."
-        },
-        "contact": {
-            "title": "Contact Us",
-            "content": "If you have questions about this Privacy Policy, please contact us through our platform."
-        }
+    "integrations": {
+      "title": "Integrations",
+      "view_all": "View all",
+      "no_integrations": "No integrations available",
+      "no_integrations_description": "You haven't configured any integrations yet. Add your first integration to get started.",
+      "add_first": "Add your first integration",
+      "loading": "Loading integrations..."
     }
+  },
+  "integrations": {
+    "title": "Integrations",
+    "is_favorite": "Favorite",
+    "loading": "Loading integrations...",
+    "filter_by_status": "Filter by status",
+    "manage_description": "Manage integrations with external security tools",
+    "new_integration": "New Integration",
+    "total": "Total",
+    "active": "Active",
+    "inactive": "Inactive",
+    "with_errors": "With Errors",
+    "search_placeholder": "Search integrations",
+    "search_by_name": "Search by name or provider",
+    "status_filter": "Status",
+    "provider_filter": "Provider",
+    "loading_integrations": "Loading integrations...",
+    "no_integrations": "No integrations",
+    "create_first": "Create your first integration to get started",
+    "no_results": "No results found",
+    "adjust_filters": "Try adjusting the search filters",
+    "edit_action": "Edit",
+    "test_connection": "Test Connection",
+    "delete_action": "Delete",
+    "connection_success": "Connection successful",
+    "connection_error": "Connection error",
+    "test_error": "Error testing connection",
+    "close": "Close",
+
+    "status": {
+      "active": "Active",
+      "inactive": "Inactive",
+      "error": "Error",
+      "unknown": "Unknown",
+      "label": "Status"
+    },
+    "configure": "Configure",
+    "usage_count": "Used {count} times",
+    "is_favorite": "Favorite",
+    "add_integration": "Add Integration",
+    "edit_integration": "Edit Integration",
+    "delete_integration": "Delete Integration",
+    "api_key": "API Key",
+    "provider": "Provider",
+    "custom_integration": "Custom integration",
+    "website": "Website",
+    "not_available": "N/A",
+    "last_updated": "Last Updated",
+    "name": "Name",
+    "created_at": "Created",
+    "updated_at": "Updated",
+    "actions": "Actions",
+    "table": {
+      "name": "Name",
+      "provider": "Provider",
+      "status": "Status",
+      "created_at": "Created",
+      "updated_at": "Updated",
+      "actions": "Actions",
+      "created": "Created"
+    },
+    "messages": {
+      "error": "An error occurred while processing the request",
+      "load_error": "Error loading integrations",
+      "activated": "Integration activated successfully",
+      "deactivated": "Integration deactivated successfully",
+      "created": "Integration created successfully",
+      "updated": "Integration updated successfully",
+      "deleted": "Integration deleted successfully"
+    },
+    "delete": {
+      "title": "Delete Integration",
+      "message": "Are you sure you want to delete this integration? This action cannot be undone."
+    },
+    "form": {
+      "title_add": "Add Integration",
+      "title_edit": "Edit Integration",
+      "name_label": "Integration Name",
+      "provider_label": "Provider",
+      "provider_info": "Provider Information",
+      "active_label": "Active",
+      "active_hint": "Enable or disable this integration",
+      "favorite_label": "Set as favorite",
+      "favorite_hint": "Mark this integration as favorite to appear first",
+      "configuration": "Configuration",
+      "save_button": "Save Integration",
+      "update_button": "Update Integration",
+      "create_button": "Create Integration",
+      "cancel_button": "Cancel",
+      "default_hint_disabled": "Default integration cannot be disabled",
+      "validation": {
+        "name_required": "Name is required",
+        "name_min_length": "Name must be at least 3 characters",
+        "name_max_length": "Name cannot exceed 50 characters",
+        "provider_required": "You must select a provider",
+        "field_required": "{field} is required",
+        "invalid_url": "Must be a valid URL"
+      },
+      "placeholder": {
+        "name_placeholder": "My new integration",
+        "provider_placeholder": "Select a provider",
+        "api_key_saved": "API key is securely saved (click eye to view/edit)"
+      },
+      "hint": {
+        "api_key_optional": "Leave empty to keep the current API key, or enter a new one to update it"
+      }
+    },
+    "providers": {
+      "virustotal": {
+        "name": "VirusTotal",
+        "description": "Analyze suspicious files, domains, IPs and URLs to detect malware and other breaches",
+        "api_key_label": "API Key",
+        "api_key_placeholder": "Enter your VirusTotal API key",
+        "api_key_description": "Get your API key from VirusTotal console"
+      },
+      "abuseipdb": {
+        "name": "AbuseIPDB",
+        "description": "Check IP addresses against a database of IPs associated with malicious activity",
+        "api_key_label": "API Key",
+        "api_key_placeholder": "Enter your AbuseIPDB API key",
+        "api_key_description": "Get your API key from AbuseIPDB account settings"
+      },
+      "alienvault": {
+        "name": "AlienVault OTX",
+        "description": "Access threat intelligence data from the Open Threat Exchange",
+        "api_key_label": "API Key",
+        "api_key_placeholder": "Enter your AlienVault OTX API key",
+        "api_key_description": "Get your API key from AlienVault OTX settings"
+      }
+    }
+  },
+  "profile": {
+    "title": "Profile Settings",
+    "subtitle": "Manage your account settings and preferences",
+    "edit_profile": {
+      "title": "Edit Profile",
+      "name": "Name",
+      "email": "Email",
+      "save_button": "Save Changes",
+      "success_message": "Profile updated successfully",
+      "error_message": "Error updating profile. Please try again."
+    },
+    "user_info": {
+      "title": "User Information",
+      "name": "Name",
+      "email": "Email",
+      "edit_button": "Edit Profile"
+    },
+    "theme": {
+      "title": "Theme Settings",
+      "description": "Choose your preferred theme for the application",
+      "selector_label": "Select Theme",
+      "select_label": "Select Theme",
+      "options": {
+        "antereonDark": "Dark Theme",
+        "antereonLight": "Light Theme"
+      }
+    },
+    "change_password": {
+      "title": "Change Password",
+      "description": "Update your account password",
+      "current_password": "Current Password",
+      "new_password": "New Password",
+      "confirm_password": "Confirm New Password",
+      "save_button": "Change Password",
+      "success_message": "Password changed successfully",
+      "error_message": "Error changing password. Please try again."
+    },
+    "password": {
+      "title": "Password",
+      "description": "Change your account password",
+      "change_button": "Change Password"
+    },
+    "validation": {
+      "name_required": "Name is required",
+      "name_min_length": "Name must be at least 2 characters",
+      "email_required": "Email is required",
+      "email_invalid": "Please enter a valid email address",
+      "current_password_required": "Current password is required",
+      "new_password_required": "New password is required",
+      "password_min_length": "Password must be at least 8 characters",
+      "confirm_password_required": "Please confirm your password",
+      "passwords_not_match": "Passwords do not match"
+    },
+    "messages": {
+      "profile_updated": "Profile updated successfully",
+      "profile_update_error": "Error updating profile. Please try again.",
+      "password_changed": "Password changed successfully",
+      "password_change_error": "Error changing password. Please try again."
+    }
+  },
+  "history": {
+    "title": "Analysis History",
+    "description": "Review all previously performed IOC analyses",
+    "loading": "Loading history...",
+    "no_results": "No saved analyses",
+    "no_results_description": "Analyses you perform will automatically appear here",
+    "perform_analysis": "Perform Analysis",
+    "clear_all": "Clear All",
+    "filters": {
+      "provider": "Provider",
+      "ioc_type": "IOC Type",
+      "search_ioc": "Search IOC"
+    },
+    "status": {
+      "success": "Success",
+      "error": "Error"
+    },
+    "providers": {
+      "virustotal": "VirusTotal",
+      "abuseipdb": "AbuseIPDB",
+      "alienvault": "AlienVault OTX"
+    },
+    "ioc_types": {
+      "ip": "IP",
+      "domain": "Domain",
+      "hash": "Hash",
+      "url": "URL"
+    },
+    "card": {
+      "view_details": "View Details",
+      "delete": "Delete",
+      "analyzed_on": "Analyzed on",
+      "analysis": "Analysis",
+      "saved": "Saved",
+      "detections": "Detections",
+      "confidence": "Confidence",
+      "provider": "Provider",
+      "type": "Type",
+      "value": "Value",
+      "country": "Country",
+      "asn": "ASN",
+      "pulses": "Pulses",
+      "status": {
+        "clean": "Clean",
+        "malicious": "Malicious",
+        "suspicious": "Suspicious",
+        "unknown": "Unknown",
+        "success": "Success",
+        "error": "Error",
+        "pending": "Pending"
+      },
+      "ioc_type": {
+        "ip": "IP Address",
+        "domain": "Domain",
+        "hash": "Hash",
+        "url": "URL"
+      }
+    },
+    "modal": {
+      "saved_date": "Saved Date",
+      "analysis_data": "Analysis Data",
+      "error_details": "Error Details",
+      "title": "Analysis Details",
+      "analysis_details": "Analysis Details",
+      "analysis": "Analysis",
+      "copy": "Copy",
+      "copied": "Copied",
+      "json_data": "JSON Data",
+      "basic_info": "Basic Information",
+      "ioc_value": "IOC Value",
+      "ioc_type": "IOC Type",
+      "provider": "Provider",
+      "status": "Status",
+      "analyzed_at": "Analyzed At",
+      "saved_at": "Saved At",
+      "analysis_results": "Analysis Results",
+      "malicious": "Malicious",
+      "suspicious": "Suspicious",
+      "clean": "Clean",
+      "confidence": "Confidence",
+      "abuse_confidence": "Abuse Confidence",
+      "country": "Country",
+      "usage_type": "Usage Type",
+      "isp": "ISP",
+      "raw_data": "Raw Data",
+      "error": "Error",
+      "detection_details": "Detection Details",
+      "detection_rate": "detection rate",
+      "metadata": "Metadata",
+      "additional_info": "Additional Information",
+      "virustotal_description": "This analysis was performed using VirusTotal, a service that analyzes files and URLs for malicious content using multiple antivirus engines.",
+      "alienvault_description": "This analysis was performed using AlienVault OTX, a threat intelligence platform that provides information about malicious IPs, domains, URLs and file hashes.",
+      "view_on_virustotal": "View on VirusTotal",
+      "view_on_alienvault": "View on AlienVault OTX",
+      "whois": "WHOIS Information",
+      "export": "Export",
+      "close": "Close",
+      "delete": "Delete"
+    },
+    "messages": {
+      "delete_success": "Analysis deleted successfully",
+      "delete_error": "Error deleting analysis",
+      "clear_success": "History cleared successfully",
+      "clear_error": "Error clearing history",
+      "load_error": "Error loading history"
+    }
+  },
+  "common": {
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "confirm": "Confirm",
+    "save": "Save",
+    "analyze": "Analyze",
+    "edit": "Edit",
+    "close": "Close",
+    "actions": "Actions",
+    "search_ioc": "Search IOC",
+    "enter_ioc": "Enter IOC (IP, domain, hash, or URL)",
+    "ioc_examples": "Examples: 8.8.8.8, google.com, d41d8cd98f00b204e9800998ecf8427e",
+    "quick_actions": "Quick Actions",
+    "no_analysis_yet": "No analysis performed yet",
+    "export_results": "Export Results",
+    "clear_all": "Clear All",
+    "supported_types": "Supported Types",
+    "analysis_results": "Analysis Results",
+    "detected_type": "Detected Type",
+    "result": "result | results",
+    "not_supported": "Not Supported",
+    "select_integration": "Select Integration",
+    "select_integration_placeholder": "Choose an integration to use",
+    "no_integrations_available": "No integrations available for this provider",
+    "add_integration": "Add Integration",
+    "default": "Default",
+    "and": "and",
+    "back_to_home": "Back to Home"
+  },
+  "abuseipdb": {
+    "title": "AbuseIPDB IP Analysis",
+    "description": "Analyze IP addresses against AbuseIPDB's database of malicious IPs reported by users worldwide. Only IP addresses are supported.",
+    "analyze_button": "Analyze IP"
+  },
+  "ioc_type": {
+    "ip": "IP Address",
+    "domain": "Domain",
+    "hash": "Hash",
+    "url": "URL",
+    "unknown": "Unknown"
+  },
+  "validations": {
+    "email": "Email is required",
+    "password": "Password must be at least 8 characters and contain at least one uppercase letter, one lowercase letter, one number, and may include special characters",
+    "minLength": "Must be at least {length} characters",
+    "maxLength": "Must be at most {length} characters",
+    "required": "Field is required",
+    "passwords_no_match": "Passwords must match",
+    "invalid_url": "Invalid URL"
+  },
+  "privacy_policy": {
+    "title": "Privacy Policy",
+    "last_updated": "Last updated: January 2026",
+    "introduction": {
+      "title": "Introduction",
+      "content": "This Privacy Policy explains how Antereon collects, uses, and protects your information when you use our threat intelligence platform."
+    },
+    "data_collection": {
+      "title": "What Information We Collect",
+      "content": "When you create an account, we collect your email address, username, and encrypted password. We also save your theme preference (light or dark mode) in your browser's local storage to remember your choice."
+    },
+    "data_usage": {
+      "title": "How We Use Your Information",
+      "content": "We use your email and password to authenticate your account and provide access to our platform. Your theme preference is stored locally to maintain your visual preferences across sessions. We do not track your activity or share your information with third parties."
+    },
+    "data_storage": {
+      "title": "Data Storage",
+      "content": "Your account information is securely stored on our servers with encrypted passwords. Your authentication token and theme preference are stored in your browser's local storage for functionality purposes. We do not use cookies."
+    },
+    "your_rights": {
+      "title": "Your Rights",
+      "content": "You can view and update your account information at any time through your profile settings. If you want to delete your account, please contact us through our support system."
+    },
+    "contact": {
+      "title": "Contact Us",
+      "content": "If you have questions about this Privacy Policy, please contact us through our platform."
+    }
+  }
 }

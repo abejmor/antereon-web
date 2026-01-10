@@ -85,6 +85,19 @@
         class="elevation-0"
         data-testid="integrations-table"
       >
+        <template #[`item.name`]="{ item }">
+          <div class="d-flex align-center">
+            <span class="mr-2">{{ item.name }}</span>
+            <v-icon
+              v-if="item.isFavorite"
+              :title="t('integrations.is_favorite')"
+              icon="mdi-star"
+              color="warning"
+              size="small"
+            />
+          </div>
+        </template>
+
         <template #[`item.provider`]="{ item }">
           <div
             class="d-flex align-center"

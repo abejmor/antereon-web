@@ -67,11 +67,11 @@ describe('IntegrationForm', () => {
     const wrapperEdit = createWrapper({
       modelValue:  true,
       integration: {
-        id:        '1',
-        name:      'Test',
-        provider:  'virustotal',
-        isActive:  true,
-        isDefault: false
+        id:         '1',
+        name:       'Test',
+        provider:   'virustotal',
+        isActive:   true,
+        isFavorite: false
       }
     })
     expect(wrapperEdit.text()).toContain('Edit Integration')

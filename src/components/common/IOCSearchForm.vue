@@ -136,11 +136,20 @@ const emit = defineEmits<Emits>()
 const { t } = useI18n()
 
 const selectedIntegrationId = ref<string | null>(null)
+const currentIntegration = ref<Integration | null>(null)
 
-const isTypeSupported = computed(() => {
-  if (!props.searchInput.trim() || props.detectedType === 'unknown') return false
-  return getSupportedIOCTypes(props.provider).includes(props.detectedType)
+const selectedProviderId = computed(() => {
+  if (!props.showIntegrationSelector) return props.provider
+  return currentIntegration.value?.provider
 })
+
+const isTypeSupported = computed(
+  () =>
+    !!selectedProviderId.value &&
+    !!props.searchInput.trim() &&
+    props.detectedType !== 'unknown' &&
+    getSupportedIOCTypes(selectedProviderId.value).includes(props.detectedType)
+)
 
 const handleAnalyze = () => {
   if (!props.searchInput.trim() || props.isLoading || !isTypeSupported.value) return
@@ -149,10 +158,14 @@ const handleAnalyze = () => {
 }
 
 const handleIntegrationSelected = (integration: Integration | null) => {
+  currentIntegration.value = integration
   emit('integration-selected', integration)
 }
 
-watch(() => props.provider, () => {
-  selectedIntegrationId.value = null
-})
+watch(
+  () => props.provider,
+  () => {
+    selectedIntegrationId.value = null
+  }
+)
 </script>

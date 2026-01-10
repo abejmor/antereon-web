@@ -22,8 +22,16 @@
           </v-avatar>
 
           <div>
-            <v-card-title class="text-h6 pa-0">
+            <v-card-title class="text-h6 pa-0 d-flex align-center">
               {{ integration.name }} · {{ integration.provider ? getIntegrationProvider(integration.provider.id)?.name : t('integrations.custom_integration') }}
+              <v-icon
+                v-if="integration.isFavorite"
+                :title="t('integrations.is_favorite')"
+                icon="mdi-star"
+                color="warning"
+                size="small"
+                class="ml-2"
+              />
             </v-card-title>
             <div class="text-caption text-medium-emphasis">
               {{ integration.provider ? getIntegrationProvider(integration.provider.id)?.description : t('integrations.custom_integration') }}

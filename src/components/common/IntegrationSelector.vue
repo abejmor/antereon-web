@@ -13,7 +13,10 @@
     @update:model-value="handleSelectionChange"
   >
     <template #item="{ props: itemProps, item }">
-      <v-list-item v-bind="itemProps">
+      <v-list-item
+        v-bind="itemProps"
+        :subtitle="item.raw.provider?.name"
+      >
         <template #prepend>
           <v-avatar
             :color="item.raw.provider?.color || 'primary'"
@@ -26,9 +29,16 @@
             />
           </v-avatar>
         </template>
-        <v-list-item-subtitle>
-          {{ item.raw.provider?.name }}
-        </v-list-item-subtitle>
+
+        <template #append>
+          <v-icon
+            v-if="item.raw.isFavorite"
+            :title="t('integrations.is_favorite')"
+            icon="mdi-star"
+            color="warning"
+            size="small"
+          />
+        </template>
       </v-list-item>
     </template>
 
@@ -45,7 +55,14 @@
             size="12"
           />
         </v-avatar>
-        <span>{{ item.raw.name }}</span>
+        <span class="mr-2">{{ item.raw.name }}</span>
+        <v-icon
+          v-if="item.raw.isFavorite"
+          :title="t('integrations.is_favorite')"
+          icon="mdi-star"
+          color="warning"
+          size="x-small"
+        />
       </div>
     </template>
 
@@ -120,8 +137,8 @@ const availableIntegrations = computed(() => {
   })) as (Integration & { provider: IntegrationProvider | undefined })[]
 
   return enriched.sort((a, b) => {
-    if (a.isDefault && !b.isDefault) return -1
-    if (!a.isDefault && b.isDefault) return 1
+    if (a.isFavorite && !b.isFavorite) return -1
+    if (!a.isFavorite && b.isFavorite) return 1
     return a.name.localeCompare(b.name)
   })
 })
@@ -130,7 +147,7 @@ const handleSelectionChange = (value: string | null) => {
   emit('update:modelValue', value)
 
   const selectedIntegrationObj = value
-    ? availableIntegrations.value.find((integration) => integration.id === value)
+    ? integrations.value.find((integration) => integration.id === value)
     : null
 
   emit('integration-selected', selectedIntegrationObj || null)

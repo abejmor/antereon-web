@@ -6,16 +6,19 @@ describe('navigation', () => {
     })
 
     cy.window().then((win) => {
-      win.localStorage.setItem('auth', JSON.stringify({
-        authorized: true,
-        token:      'mock-jwt-token',
-        user:       {
-          id:    '1',
-          name:  'Test User',
-          email: 'test@example.com',
-          theme: 'light'
-        }
-      }))
+      win.localStorage.setItem(
+        'auth',
+        JSON.stringify({
+          authorized: true,
+          token:      'mock-jwt-token',
+          user:       {
+            id:    '1',
+            name:  'Test User',
+            email: 'test@example.com',
+            theme: 'light'
+          }
+        })
+      )
     })
 
     cy.intercept('GET', '/api/**', { fixture: 'empty-response.json' }).as('apiCall')
@@ -44,19 +47,9 @@ describe('navigation', () => {
       cy.url().should('include', '/profile')
     })
 
-    it('should load virustotal page', () => {
-      cy.visit('/virustotal')
-      cy.url().should('include', '/virustotal')
-    })
-
-    it('should load abuseipdb page', () => {
-      cy.visit('/abuseipdb')
-      cy.url().should('include', '/abuseipdb')
-    })
-
-    it('should load alienvault page', () => {
-      cy.visit('/alienvault')
-      cy.url().should('include', '/alienvault')
+    it('should load analysis page', () => {
+      cy.visit('/analysis')
+      cy.url().should('include', '/analysis')
     })
 
     it('should load history page', () => {

@@ -35,81 +35,26 @@ describe('ioc search', () => {
     })
   })
 
-  describe('virustotal search', () => {
+  describe('unified analysis search', () => {
     beforeEach(() => {
-      cy.visit('/virustotal')
+      cy.visit('/analysis')
+    })
+
+    it('should display analysis page', () => {
+      cy.get('body').should('exist')
+      cy.url().should('include', '/analysis')
     })
 
     it('should display search form', () => {
       cy.get('body').should('exist')
-      cy.url().should('include', '/virustotal')
     })
 
-    it('should search for ip address', () => {
+    it('should detect ioc type', () => {
       cy.get('body').should('exist')
-      cy.url().should('include', '/virustotal')
-    })
-
-    it('should search for domain', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/virustotal')
-    })
-
-    it('should search for hash', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/virustotal')
-    })
-
-    it('should display detected ioc type', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/virustotal')
     })
 
     it('should clear search input', () => {
       cy.get('body').should('exist')
-      cy.url().should('include', '/virustotal')
-    })
-  })
-
-  describe('abuseipdb search', () => {
-    beforeEach(() => {
-      cy.visit('/abuseipdb')
-    })
-
-    it('should display search form', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/abuseipdb')
-    })
-
-    it('should search for ip address', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/abuseipdb')
-    })
-
-    it('should display detected ioc type', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/abuseipdb')
-    })
-  })
-
-  describe('alienvault search', () => {
-    beforeEach(() => {
-      cy.visit('/alienvault')
-    })
-
-    it('should display search form', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/alienvault')
-    })
-
-    it('should search for ip address', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/alienvault')
-    })
-
-    it('should display detected ioc type', () => {
-      cy.get('body').should('exist')
-      cy.url().should('include', '/alienvault')
     })
   })
 
