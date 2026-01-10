@@ -147,7 +147,7 @@ const handleSelectionChange = (value: string | null) => {
   emit('update:modelValue', value)
 
   const selectedIntegrationObj = value
-    ? availableIntegrations.value.find((integration) => integration.id === value)
+    ? integrations.value.find((integration) => integration.id === value)
     : null
 
   emit('integration-selected', selectedIntegrationObj || null)

@@ -138,24 +138,18 @@ const { t } = useI18n()
 const selectedIntegrationId = ref<string | null>(null)
 const currentIntegration = ref<Integration | null>(null)
 
-const isTypeSupported = computed(() => {
-  if (!props.searchInput.trim() || props.detectedType === 'unknown') return false
-
-  let providerId = props.provider
-
-  if (props.showIntegrationSelector) {
-    if (!currentIntegration.value) return false
-    const provider = currentIntegration.value.provider
-    // Handle enriched integration object where provider is an object
-    if (typeof provider === 'object' && provider !== null && 'id' in provider) {
-      providerId = (provider as any).id
-    } else {
-      providerId = provider as unknown as string
-    }
-  }
-
-  return getSupportedIOCTypes(providerId).includes(props.detectedType)
+const selectedProviderId = computed(() => {
+  if (!props.showIntegrationSelector) return props.provider
+  return currentIntegration.value?.provider
 })
+
+const isTypeSupported = computed(
+  () =>
+    !!selectedProviderId.value &&
+    !!props.searchInput.trim() &&
+    props.detectedType !== 'unknown' &&
+    getSupportedIOCTypes(selectedProviderId.value).includes(props.detectedType)
+)
 
 const handleAnalyze = () => {
   if (!props.searchInput.trim() || props.isLoading || !isTypeSupported.value) return
