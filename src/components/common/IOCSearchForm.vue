@@ -136,10 +136,25 @@ const emit = defineEmits<Emits>()
 const { t } = useI18n()
 
 const selectedIntegrationId = ref<string | null>(null)
+const currentIntegration = ref<Integration | null>(null)
 
 const isTypeSupported = computed(() => {
   if (!props.searchInput.trim() || props.detectedType === 'unknown') return false
-  return getSupportedIOCTypes(props.provider).includes(props.detectedType)
+
+  let providerId = props.provider
+
+  if (props.showIntegrationSelector) {
+    if (!currentIntegration.value) return false
+    const provider = currentIntegration.value.provider
+    // Handle enriched integration object where provider is an object
+    if (typeof provider === 'object' && provider !== null && 'id' in provider) {
+      providerId = (provider as any).id
+    } else {
+      providerId = provider as unknown as string
+    }
+  }
+
+  return getSupportedIOCTypes(providerId).includes(props.detectedType)
 })
 
 const handleAnalyze = () => {
@@ -149,10 +164,14 @@ const handleAnalyze = () => {
 }
 
 const handleIntegrationSelected = (integration: Integration | null) => {
+  currentIntegration.value = integration
   emit('integration-selected', integration)
 }
 
-watch(() => props.provider, () => {
-  selectedIntegrationId.value = null
-})
+watch(
+  () => props.provider,
+  () => {
+    selectedIntegrationId.value = null
+  }
+)
 </script>

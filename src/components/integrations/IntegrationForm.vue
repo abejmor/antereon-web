@@ -7,7 +7,9 @@
   >
     <v-card>
       <v-card-title class="d-flex align-center justify-space-between">
-        <span>{{ isEditing ? t('integrations.form.title_edit') : t('integrations.form.title_add') }}</span>
+        <span>{{
+          isEditing ? t('integrations.form.title_edit') : t('integrations.form.title_add')
+        }}</span>
         <v-btn
           icon="mdi-close"
           variant="text"
@@ -123,11 +125,11 @@
         />
 
         <v-switch
-          v-model="formData.isDefault"
+          v-model="formData.isFavorite"
           :disabled="!formData.isActive"
-          :label="t('integrations.form.default_label')"
-          :hint="formData.isActive ? t('integrations.form.default_hint') : t('integrations.form.default_hint_disabled')"
-          color="primary"
+          :label="t('integrations.form.favorite_label')"
+          :hint="formData.isActive ? t('integrations.form.favorite_hint') : ''"
+          color="warning"
           class="mb-4"
           persistent-hint
         />
@@ -158,7 +160,6 @@
                   <v-btn
                     v-if="field.type === 'password'"
                     :icon="showPasswords[field.key] ? 'mdi-eye-off' : 'mdi-eye'"
-
                     variant="text"
                     size="small"
                     class="me-1"
@@ -198,7 +199,9 @@
           type="submit"
           color="primary"
         >
-          {{ isEditing ? t('integrations.form.update_button') : t('integrations.form.create_button') }}
+          {{
+            isEditing ? t('integrations.form.update_button') : t('integrations.form.create_button')
+          }}
         </v-btn>
       </v-card-actions>
     </v-card>
@@ -206,9 +209,17 @@
 </template>
 
 <script setup lang="ts">
-import type { Integration, CreateIntegrationRequest, UpdateIntegrationRequest } from '@/types/integration'
+import type {
+  Integration,
+  CreateIntegrationRequest,
+  UpdateIntegrationRequest
+} from '@/types/integration'
 
-import { AVAILABLE_INTEGRATIONS, getIntegrationProvider, type IntegrationField } from '@/constants/integrations'
+import {
+  AVAILABLE_INTEGRATIONS,
+  getIntegrationProvider,
+  type IntegrationField
+} from '@/constants/integrations'
 import { integrationsService } from '@/services/integrationsService'
 import { required, minLength, maxLength, url } from '@/validators'
 
@@ -245,7 +256,7 @@ const initializeFormData = () => {
       provider:      props.integration.provider || '',
       apiKey:        '',
       isActive:      props.integration.isActive ?? true,
-      isDefault:     props.integration.isDefault ?? false,
+      isFavorite:    props.integration.isFavorite ?? false,
       configuration: { ...props.integration.configuration }
     }
   }
@@ -254,7 +265,7 @@ const initializeFormData = () => {
     provider:      '',
     apiKey:        '',
     isActive:      true,
-    isDefault:     false,
+    isFavorite:    false,
     configuration: {}
   }
 }
@@ -266,15 +277,9 @@ const selectedProvider = computed(() => {
   return getIntegrationProvider(formData.value.provider)
 })
 
-const nameRules = [
-  required,
-  minLength(3),
-  maxLength(50)
-]
+const nameRules = [required, minLength(3), maxLength(50)]
 
-const providerRules = [
-  required
-]
+const providerRules = [required]
 
 const getFieldRules = (field: IntegrationField) => {
   const rules = []
@@ -331,8 +336,8 @@ const buildUpdateData = (): UpdateIntegrationRequest => {
   if (formData.value.isActive !== integration.isActive) {
     changedData.isActive = formData.value.isActive
   }
-  if (formData.value.isDefault !== integration.isDefault) {
-    changedData.isDefault = formData.value.isDefault
+  if (formData.value.isFavorite !== integration.isFavorite) {
+    changedData.isFavorite = formData.value.isFavorite
   }
 
   if (formData.value.apiKey && formData.value.apiKey.trim()) {
@@ -346,7 +351,7 @@ const buildCreateData = (): CreateIntegrationRequest => ({
   name:          formData.value.name,
   provider:      formData.value.provider,
   apiKey:        formData.value.apiKey || '',
-  isDefault:     formData.value.isDefault,
+  isFavorite:    formData.value.isFavorite,
   configuration: {
     ...formData.value.configuration,
     api_key: formData.value.apiKey || ''
@@ -354,7 +359,12 @@ const buildCreateData = (): CreateIntegrationRequest => ({
 })
 
 const togglePasswordVisibility = async (fieldKey: string) => {
-  if (fieldKey === 'api_key' && isEditing.value && !showPasswords.value[fieldKey] && !formData.value.apiKey) {
+  if (
+    fieldKey === 'api_key' &&
+    isEditing.value &&
+    !showPasswords.value[fieldKey] &&
+    !formData.value.apiKey
+  ) {
     try {
       if (props.integration?.id) {
         const decryptedData = await integrationsService.getDecryptedApiKey(props.integration.id)
@@ -376,13 +386,20 @@ const handleSubmit = async () => {
   emit('submit', submitData)
 }
 
-watch(() => props.integration, () => {
-  formData.value = initializeFormData()
-}, { immediate: false })
+watch(
+  () => props.integration,
+  () => {
+    formData.value = initializeFormData()
+  },
+  { immediate: false }
+)
 
-watch(() => formData.value.isActive, (newValue) => {
-  if (!newValue && formData.value.isDefault) {
-    formData.value.isDefault = false
+watch(
+  () => formData.value.isActive,
+  (newValue) => {
+    if (!newValue && formData.value.isFavorite) {
+      formData.value.isFavorite = false
+    }
   }
-})
+)
 </script>

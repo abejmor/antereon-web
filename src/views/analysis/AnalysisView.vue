@@ -1,14 +1,14 @@
 <template>
   <div
-    :class="`${provider}-view`"
-    :data-testid="`${provider}-view`"
+    class="analysis-view"
+    data-testid="analysis-view"
   >
     <v-container fluid>
       <IOCProviderHeader
-        :title="t(`${provider}.title`)"
-        :description="t(`${provider}.description`)"
-        :icon="providerConfig.icon"
-        data-testid="provider-header"
+        :title="t('analysis.title')"
+        :description="t('analysis.description')"
+        icon="mdi-magnify-scan"
+        data-testid="analysis-header"
       />
 
       <v-row class="mb-6">
@@ -21,8 +21,7 @@
             :is-loading="isAnalyzing"
             :error="error"
             :detected-type="detectedType"
-            :provider="provider"
-            :analyze-button-text="t(`${provider}.analyze_button`)"
+            :analyze-button-text="t('common.analyze')"
             :show-integration-selector="true"
             data-testid="search-form"
             @analyze="handleAnalyze"
@@ -85,10 +84,10 @@
         :has-results="hasResults"
         :is-loading="isAnalyzing"
         :title="t('common.no_analysis_yet')"
-        :description="t(`${provider}.description`)"
+        :description="t('analysis.empty_state_description')"
         :supported-types-title="t('common.supported_types')"
-        :icon="providerConfig.icon"
-        :provider="provider"
+        icon="mdi-shield-search"
+        provider=""
       />
     </v-container>
 
@@ -110,24 +109,6 @@ import {
   type IOCResultBase,
   type IOCAnalysisResult
 } from '@/services/iocAnalysisService'
-
-type ProviderType = 'virustotal' | 'abuseipdb' | 'alienvault'
-
-interface ProviderConfig {
-  icon: string
-}
-
-const PROVIDER_CONFIGS: Record<ProviderType, ProviderConfig> = {
-  virustotal: { icon: 'mdi-virus' },
-  abuseipdb:  { icon: 'mdi-security' },
-  alienvault: { icon: 'mdi-alien' }
-}
-
-const props = defineProps<{
-  provider: ProviderType
-}>()
-
-const providerConfig = computed(() => PROVIDER_CONFIGS[props.provider])
 
 const { t } = useI18n()
 const {

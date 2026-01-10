@@ -19,27 +19,13 @@
         class="mb-1"
         exact
       />
-      <v-list-subheader>{{ t('sidebar.analysis') }}</v-list-subheader>
-      <v-list-group
-        value="analysis"
-        prepend-icon="mdi-magnify"
-      >
-        <template #activator="{ props }">
-          <v-list-item
-            v-bind="props"
-            :title="t('sidebar.analysis_tools')"
-          />
-        </template>
-        <v-list-item
-          v-for="tool in analysisTools"
-          :key="tool.name"
-          :to="{ name: tool.route }"
-          :prepend-icon="tool.icon"
-          :title="t(tool.title)"
-          color="primary"
-          class="mb-1 ms-4"
-        />
-      </v-list-group>
+      <v-list-item
+        :to="{ name: 'analysis' }"
+        :title="t('sidebar.analysis_tools')"
+        prepend-icon="mdi-magnify-scan"
+        color="primary"
+        class="mb-1"
+      />
       <v-list-item
         :to="{ name: 'history' }"
         :title="t('sidebar.history')"
@@ -112,28 +98,6 @@ const handleLogout = async () => {
   await authStore.removeSession()
   router.push({ name: 'login' })
 }
-
-//store ctr
-const analysisTools = [
-  {
-    name:  'virustotal',
-    route: 'virustotal',
-    icon:  'mdi-virus',
-    title: 'sidebar.virustotal'
-  },
-  {
-    name:  'alienvault',
-    route: 'alienvault',
-    icon:  'mdi-alien',
-    title: 'sidebar.alienvault'
-  },
-  {
-    name:  'abuseipdb',
-    route: 'abuseipdb',
-    icon:  'mdi-database-search',
-    title: 'sidebar.abuseipdb'
-  }
-]
 
 import { getUserInitials } from '@/helpers/dateHelpers'
 
