@@ -47,7 +47,6 @@ describe('ioc search', () => {
 
     it('should display search form', () => {
       cy.get('body').should('exist')
-      // Add more specific selectors here when the UI is stable
     })
 
     it('should detect ioc type', () => {
