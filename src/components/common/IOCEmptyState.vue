@@ -17,25 +17,18 @@
         <p class="text-body-2 text-medium-emphasis mb-4">
           {{ description }}
         </p>
-        <IOCSupportedTypes
-          :title="supportedTypesTitle"
-          :provider="provider"
-        />
       </v-card>
     </v-col>
   </v-row>
 </template>
 
 <script setup lang="ts">
-
 interface Props {
   hasResults: boolean
   isLoading: boolean
   icon: string
   title: string
   description: string
-  provider: string
-  supportedTypesTitle: string
 }
 
 defineProps<Props>()

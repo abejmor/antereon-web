@@ -85,9 +85,7 @@
         :is-loading="isAnalyzing"
         :title="t('common.no_analysis_yet')"
         :description="t('analysis.empty_state_description')"
-        :supported-types-title="t('common.supported_types')"
         icon="mdi-shield-search"
-        provider=""
       />
     </v-container>
 

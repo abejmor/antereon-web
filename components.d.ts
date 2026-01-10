@@ -23,7 +23,6 @@ declare module 'vue' {
     IOCProviderHeader: typeof import('./src/components/common/IOCProviderHeader.vue')['default']
     IOCQuickActions: typeof import('./src/components/common/IOCQuickActions.vue')['default']
     IOCSearchForm: typeof import('./src/components/common/IOCSearchForm.vue')['default']
-    IOCSupportedTypes: typeof import('./src/components/common/IOCSupportedTypes.vue')['default']
     NetworkVisualization: typeof import('./src/components/landing-parts/hero-section/network-visualization/NetworkVisualization.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
