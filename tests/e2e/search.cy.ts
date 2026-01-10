@@ -6,20 +6,27 @@ describe('ioc search', () => {
     })
 
     cy.window().then((win) => {
-      win.localStorage.setItem('auth', JSON.stringify({
-        authorized: true,
-        token:      'mock-jwt-token',
-        user:       {
-          id:    '1',
-          name:  'Test User',
-          email: 'test@example.com',
-          theme: 'light'
-        }
-      }))
+      win.localStorage.setItem(
+        'auth',
+        JSON.stringify({
+          authorized: true,
+          token:      'mock-jwt-token',
+          user:       {
+            id:    '1',
+            name:  'Test User',
+            email: 'test@example.com',
+            theme: 'light'
+          }
+        })
+      )
     })
 
-    cy.intercept('GET', '/api/**', { fixture: 'empty-response.json' }).as('apiCall')
-    cy.intercept('POST', '/api/**', { fixture: 'empty-response.json' }).as('apiPost')
+    cy.intercept('GET', '**/api/ioc-analysis*', { fixture: 'empty-response.json' }).as(
+      'getAnalysis'
+    )
+    cy.intercept('POST', '**/api/ioc-analysis*', { fixture: 'empty-response.json' }).as(
+      'createAnalysis'
+    )
   })
 
   afterEach(() => {

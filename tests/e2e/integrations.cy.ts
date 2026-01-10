@@ -5,7 +5,7 @@ describe('integrations management', () => {
       win.sessionStorage.clear()
     })
 
-    cy.intercept('GET', '/api/integrations', {
+    cy.intercept('GET', '**/api/integrations*', {
       statusCode: 200,
       body:       [
         {
