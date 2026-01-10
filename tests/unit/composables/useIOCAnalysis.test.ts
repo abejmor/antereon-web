@@ -85,8 +85,5 @@ describe('useIOCAnalysis', () => {
     composable._internalResults.value.set('k', { iocValue: '8.8.8.8', provider: 'vt' } as any)
     composable.exportResults()
     expect(mocks.export.exportIOCResults).toHaveBeenCalled()
-
-    composable.exportResults('vt')
-    expect(mocks.export.exportIOCResults).toHaveBeenCalled()
   })
 })

@@ -45,11 +45,11 @@ yarn preview
 yarn test:unit
 
 # E2E Tests (Headless)
-# Note: Requires a production build first
-yarn build
+# Note: Requires having development env running both backend and frontend
+yarn serve
 yarn test:e2e
 
-# E2E Tests (With interface)
+# E2E Tests (Same requirements as headless)
 yarn test:e2e:dev
 ```
 

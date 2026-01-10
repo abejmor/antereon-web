@@ -68,8 +68,6 @@ export const useIOCAnalysis = () => {
           throw new Error(`Provider not supported: ${userIntegration.provider}`)
       }
 
-      results.value.set(`${integrationId}-${ioc}`, result)
-
       const analysisTimestamp = new Date().toISOString()
       const savedResult = await iocAnalysisService.create({
         iocValue: result.iocValue,
@@ -109,19 +107,14 @@ export const useIOCAnalysis = () => {
   const resultsArray = computed(() => Array.from(results.value.values()))
   const hasResults = computed(() => results.value.size > 0)
 
-  const exportResults = (provider?: string) => {
+  const exportResults = () => {
     const { exportIOCResults } = useExport()
-    const resultsToExport = provider
-      ? resultsArray.value.filter((r) => r.provider === provider)
-      : resultsArray.value
 
-    if (resultsToExport.length === 0) return
+    if (resultsArray.value.length === 0) return
 
-    const filename = provider
-      ? `ioc-analysis-${provider}-${new Date().toISOString().split('T')[0]}.csv`
-      : `ioc-analysis-${new Date().toISOString().split('T')[0]}.csv`
+    const filename = `ioc-analysis-${new Date().toISOString().split('T')[0]}.csv`
 
-    exportIOCResults(resultsToExport, filename)
+    exportIOCResults(resultsArray.value, filename)
   }
 
   const getResultsForIOC = (ioc: string) => {
